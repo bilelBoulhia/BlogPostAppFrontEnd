@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="articleapp.LandingPage">
+
+    <Grid>
+        <Image Source="asdasd.png" 
+               Aspect="AspectFill" 
+               VerticalOptions="Fill" 
+               HorizontalOptions="Fill" />
+        
+
+        <ScrollView>
+            <Grid RowSpacing="0" Padding="24,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+              
+                <VerticalStackLayout Grid.Row="1" Spacing="20" VerticalOptions="Center">
+
+    
+
+                    <Frame BackgroundColor="Transparent" 
+                           BorderColor="Transparent" 
+                           CornerRadius="20" 
+                           Padding="20" 
+                           Margin="0,0,0,30">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="DevArticles"
+                                   TextColor="#FFFFFF"
+                                   FontSize="40"
+                                   
+                                   HorizontalOptions="Center"
+                                   FontFamily="Jersey15" />
+                            <Label Text="Your coding journey, documented"
+                                   TextColor="#94A3B8"
+                                   FontSize="18"
+                                   HorizontalOptions="Center"
+                                   FontFamily="Jersey15" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Padding="24"
+       StyleId="9999"
+       CornerRadius="20"
+       HasShadow="True"
+       BackgroundColor="Transparent"
+       Opacity="0.95"
+       BorderColor="Transparent">
+                        <!--<Frame.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#070F2B" Offset="0.0" />
+                                <GradientStop Color="#1A508B" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Frame.Background>-->
+                        <VerticalStackLayout Spacing="20">
+                            <Label Text="Features"
+               TextColor="AliceBlue"
+               FontFamily="Jersey15"
+               FontSize="26"
+               />
+                            <Grid RowSpacing="16">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <HorizontalStackLayout Grid.Row="0" Spacing="12">
+                                    <Label Text="→"
+                       TextColor="#4F46E5"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       FontFamily="Jersey15" />
+                                    <Label Text="Write and share technical articles"
+                       TextColor="#FFFFFF"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       FontFamily="Jersey15" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Grid.Row="1" Spacing="12">
+                                    <Label Text="→"
+                       TextColor="#4F46E5"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       FontFamily="Jersey15" />
+                                    <Label Text="Connect with fellow developers"
+                       TextColor="#FFFFFF"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       FontFamily="Jersey15" />
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Grid.Row="2" Spacing="12">
+                                    <Label Text="→"
+                       TextColor="#4F46E5"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       FontFamily="Jersey15" />
+                                    <Label Text="Learn from the community"
+                       TextColor="#FFFFFF"
+                       FontSize="20"
+                       VerticalOptions="Center"
+                       FontFamily="Jersey15" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+              
+                <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,40,0,60">
+                    <Button Text="Create Account"
+                            TextColor="White"
+                            FontFamily="Jersey15"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HeightRequest="56">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#4F46E5" Offset="0.0" />
+                                <GradientStop Color="#7C3AED" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.CornerRadius>28</Button.CornerRadius>
+                    </Button>
+
+                    <Button Text="Sign In"
+                            TextColor="#E2E8F0"
+                            FontFamily="Jersey15"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HeightRequest="56"
+                            BackgroundColor="#1E293B"
+                            BorderColor="#334155"
+                            BorderWidth="1">
+                        <Button.CornerRadius>28</Button.CornerRadius>
+                    </Button>
+
+                    <Label Text="if you forget password, m3ndi mndirlk"
+                           TextColor="Silver"
+                           FontSize="15"
+                           FontFamily="Jersey15"
+                           HorizontalOptions="Center"
+                           Margin="0,10,0,0" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
