@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="articleapp.Pages.MainArticlePage"
+             xmlns:local="clr-namespace:articleapp.ViewModels"
+         >
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0a0426" Offset="0.5" />
+            <GradientStop Color="#000000" Offset="0.0" />
+            <GradientStop Color="#1a0b2e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+
+
+    <ScrollView>
+        <Grid RowSpacing="25" Padding="24,40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title and Search Bar -->
+            <Grid Grid.Row="0" RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Discover Articles"
+                       TextColor="White"
+                       FontSize="32"
+                       FontFamily="Jersey15"
+                       Margin="0,0,0,10"/>
+
+                <Frame Grid.Row="1"
+                       BackgroundColor="#0F172A"
+                       Padding="20,5"
+                       CornerRadius="30"
+                       BorderColor="#1E293B"
+                       HasShadow="True">
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                        <Image Grid.Column="0"
+                               Source="search.png"
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               Opacity="0.6"/>
+
+                        <Entry Grid.Column="1"
+                               Placeholder="Search for topics, authors, or keywords"
+                               PlaceholderColor="#64748B"
+                               TextColor="White"
+                               BackgroundColor="Transparent"
+                               FontFamily="Jersey15"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+
+                        <Button Grid.Column="2"
+                                ImageSource="filter.png"
+                                BackgroundColor="#1E293B"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                CornerRadius="20"
+                                Padding="0"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+
+           
+            <ScrollView Grid.Row="1" 
+            Orientation="Horizontal" 
+            HorizontalScrollBarVisibility="Never">
+                <CollectionView ItemsSource="{Binding Categories}"
+                    ItemsLayout="HorizontalList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="#0F172A"
+                       Padding="20,12"
+                       CornerRadius="25"
+                       BorderColor="#1E293B"
+                       Margin="0,0,12,0">
+                                <Label Text="{Binding CategoryName}" 
+                           TextColor="White"
+                           FontFamily="Jersey15"
+                           FontSize="15"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+            <CollectionView Grid.Row="2" 
+                            ItemsSource="{Binding Articles}"
+                            IsVisible="true">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#1E293B"
+                               Padding="16"
+                               CornerRadius="8"
+                               HasShadow="True">
+                            <VerticalStackLayout Spacing="12">
+                                <Label Text="{Binding ArticleTitle}"
+                                       TextColor="white"
+                                       FontSize="22"
+                                       FontFamily="Jersey15"
+                                      
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
+
+                                <HorizontalStackLayout Spacing="8">
+                                    <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
+                                           TextColor="white"
+                                           
+                                       FontFamily="Jersey15"
+                                           FontSize="14"/>
+                                    <Label Text="•"
+                                           TextColor="white"
+                                           FontSize="14"/>
+                                    <Label Text="{Binding CategoryId, StringFormat='Category {0}'}"
+                                           TextColor="#4F46E5"
+                                           FontSize="14"
+                                           
+                                       FontFamily="Jersey15"
+                                           />
+                                </HorizontalStackLayout>
+
+                                <BoxView Color="#E2E8F0" HeightRequest="1"/>
+
+                                <Label Text="{Binding ArticleContent}"
+                                       TextColor="white"
+                                       FontSize="16"
+                                       
+                                       FontFamily="Jersey15"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="3"/>
+
+                                <Button Text="Read More"
+                                        TextColor="#4F46E5"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="#4F46E5"
+                                        BorderWidth="1"
+                                        CornerRadius="4"
+                                        Padding="12,8"
+                                        HorizontalOptions="Start"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

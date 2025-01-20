@@ -3,14 +3,31 @@
     x:Class="articleapp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:articleapp.Pages"
     xmlns:local="clr-namespace:articleapp"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Title="articleapp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:SpecificArticle}"
-        Route="LoginUI" />
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainArticlePage}" Route="Main" />
+        </Tab>
+        <Tab Title="Profile">
+            <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" Route="Profile" />
+        </Tab>
+        <Tab Title="Sign Up">
+            <ShellContent ContentTemplate="{DataTemplate local:SignupPage}" Route="SignUp" />
+        </Tab>
+        <Tab Title="Finish Sign Up">
+            <ShellContent ContentTemplate="{DataTemplate local:FinishSignUpPage}" Route="finishSignUp" />
+        </Tab>
+        <Tab Title="Login">
+            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="Login" />
+        </Tab>
+        <Tab Title="Article">
+            <ShellContent ContentTemplate="{DataTemplate local:SpecificArticle}" Route="spArticle" />
+        </Tab>
+    </TabBar>
 
 </Shell>

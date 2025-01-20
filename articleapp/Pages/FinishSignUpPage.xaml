@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="articleapp.FinishSignUpPage"
+             xmlns:viewmodels="clr-namespace:articleapp.ViewModels"
+             xmlns:models="clr-namespace:articleapp.Models"
+             
+             >
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#000000" Offset="0.0" />
+            <GradientStop Color="#1a0b2e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+
+    <ScrollView>
+        <Grid RowSpacing="20" Padding="24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            
+            <VerticalStackLayout Grid.Row="0" Spacing="15" Margin="0,40,0,0">
+                <Frame CornerRadius="75" 
+                       HeightRequest="150" 
+                       WidthRequest="150" 
+                       Padding="0"
+                       IsClippedToBounds="True"
+                       HorizontalOptions="Center"
+                       BackgroundColor="#1E293B"
+                       BorderColor="#334155">
+                    <Image x:Name="ProfileImage"
+                           Source="default_avatar.png"
+                           Aspect="AspectFill"/>
+                </Frame>
+
+                <Button Text="Choose Photo"
+                        TextColor="White"
+                        FontFamily="Jersey15"
+                        FontSize="16"
+                        WidthRequest="200"
+                        HeightRequest="40"
+                        HorizontalOptions="Center">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#4F46E5" Offset="0.0" />
+                            <GradientStop Color="#7C3AED" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.CornerRadius>20</Button.CornerRadius>
+                </Button>
+            </VerticalStackLayout>
+
+            <!-- Hobbies Section Title -->
+            <VerticalStackLayout Grid.Row="1" Spacing="8">
+                <Label Text="Choose Your Interests"
+                       TextColor="White"
+                       FontSize="28"
+                       FontFamily="Jersey15"
+                       HorizontalOptions="Center"/>
+                <Label Text="Select up to 5 hobbies that interest you"
+                       TextColor="#94A3B8"
+                       FontSize="16"
+                       FontFamily="Jersey15"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+           
+
+       
+
+            <Grid Grid.Row="2" ColumnSpacing="10" RowSpacing="10" Padding="10">
+                <CollectionView ItemsSource="{Binding AvailableHobbies}"
+                    SelectionMode="Multiple">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                            Span="3"
+                            HorizontalItemSpacing="10"
+                            VerticalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:HobbyModel">
+                            <Frame CornerRadius="20" 
+                       BackgroundColor="#1E293B" 
+                       Padding="10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FinsishSignUpViewModel}}, Path=ToggleHobbyCommand}"
+                                            CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+
+                                <Label Text="{Binding HobbyName}" 
+                           TextColor="White" 
+                           FontFamily="Jersey15" 
+                           FontSize="16" 
+                           HorizontalOptions="Center"/>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <ActivityIndicator IsVisible="{Binding IsLoading}"
+                      IsRunning="{Binding IsLoading}"
+                      Color="White"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center" />
+            </Grid>
+
+            
+   
+
+
+            <VerticalStackLayout Grid.Row="3" Margin="0,0,0,30">
+                <Label Text="{Binding SelectedHobbies.Count, StringFormat='Selected: {0}/5'}"
+    TextColor="#94A3B8"
+    FontSize="16"
+    FontFamily="Jersey15"
+    HorizontalOptions="Center"/>
+                <Button Text="Continue"
+        TextColor="White"
+        FontFamily="Jersey15"
+        FontSize="18"
+        Margin="0,20"
+        HeightRequest="56"
+        Command="{Binding SaveHobbiesCommand}"
+        IsEnabled="{Binding CanContinue}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#4F46E5" Offset="0.0" />
+                            <GradientStop Color="#7C3AED" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.CornerRadius>28</Button.CornerRadius>
+                </Button>
+
+
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

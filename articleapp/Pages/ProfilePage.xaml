@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:articleapp.ViewModels"
+             x:Class="articleapp.Pages.ProfilePage">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#000000" Offset="0.0" />
+            <GradientStop Color="#1a0b2e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="24,40">
+            <Grid RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="0" 
+                       HeightRequest="120" 
+                       WidthRequest="120"
+                       CornerRadius="60"
+                       Padding="0"
+                       IsClippedToBounds="True"
+                       HorizontalOptions="Center"
+                       BorderColor="#4F46E5">
+                    <Grid>
+                        <Image Aspect="AspectFill"
+                               Source="{Binding UserImage}"/>
+                        <Button Text="Edit"
+                                BackgroundColor="#4F46E5"
+                                TextColor="White"
+                                FontFamily="Jersey15"
+                                VerticalOptions="End"
+                                HeightRequest="40"
+                                Opacity="0.9"/>
+                    </Grid>
+                </Frame>
+
+                <VerticalStackLayout Grid.Row="1" 
+                                   Spacing="10" 
+                                   HorizontalOptions="Center">
+                    <Label Text="{Binding UserName}"
+                           TextColor="White"
+                           FontSize="24"
+                           FontFamily="Jersey15"
+                           HorizontalOptions="Center"/>
+
+                    <HorizontalStackLayout Spacing="20" 
+                                         HorizontalOptions="Center">
+                        <Button Text="{Binding FollowingCount, StringFormat='{0:N0} Following'}"
+                                TextColor="White"
+                                FontFamily="Jersey15"
+                                BackgroundColor="Transparent"
+                                BorderColor="#4F46E5"
+                                BorderWidth="1"
+                                CornerRadius="20"/>
+
+
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <FlexLayout Grid.Row="2"
+                           Wrap="Wrap"
+                           JustifyContent="Center"
+                           BindableLayout.ItemsSource="{Binding Hobbies}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="12,6" 
+                                   CornerRadius="25" 
+                                   BackgroundColor="#2D1F47" 
+                                   Margin="4">
+                                <Label Text="{Binding .}" 
+                                       TextColor="White" 
+                                       FontFamily="Jersey15"/>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </Grid>
+
+            <!-- Articles Tabs Section -->
+            <Grid RowDefinitions="Auto,*">
+                <!-- Tab Headers -->
+                <Grid Grid.Row="0" 
+                      ColumnDefinitions="*,*" 
+                      Margin="0,0,0,15">
+                    <Grid.Resources>
+                        <Style TargetType="Frame">
+                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="HasShadow" Value="False"/>
+                        </Style>
+                        <Style TargetType="Label">
+                            <Setter Property="FontFamily" Value="Jersey15"/>
+                            <Setter Property="FontSize" Value="18"/>
+                            <Setter Property="HorizontalOptions" Value="Center"/>
+                        </Style>
+                    </Grid.Resources>
+
+                    <Frame Grid.Column="0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowMyArticlesCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="My Articles" 
+                                   TextColor="White"/>
+                            <BoxView HeightRequest="2" 
+                                    BackgroundColor="#4F46E5"
+                                    IsVisible="{Binding MyArticlesSelected}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame Grid.Column="1">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowSavedArticlesCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Saved Articles" 
+                                   TextColor="White"/>
+                            <BoxView HeightRequest="2" 
+                                    BackgroundColor="#4F46E5"
+                                    IsVisible="{Binding SavedArticlesSelected}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Tab Content -->
+                <CollectionView Grid.Row="2" 
+                  ItemsSource="{Binding CurrentArticles}"
+                  IsVisible="true">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="#1E293B"
+                     Padding="16"
+                     CornerRadius="8"
+                     HasShadow="True">
+                                <VerticalStackLayout Spacing="12">
+                                    <Label Text="{Binding ArticleTitle}"
+                             TextColor="white"
+                             FontSize="22"
+                             FontFamily="Jersey15"
+                            
+                             LineBreakMode="TailTruncation"
+                             MaxLines="2"/>
+
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
+                                 TextColor="white"
+                                 
+                             FontFamily="Jersey15"
+                                 FontSize="14"/>
+                                        <Label Text="•"
+                                 TextColor="white"
+                                 FontSize="14"/>
+                                        <Label Text="{Binding CategoryId, StringFormat='Category {0}'}"
+                                 TextColor="#4F46E5"
+                                 FontSize="14"
+                                 
+                             FontFamily="Jersey15"
+                                 />
+                                    </HorizontalStackLayout>
+
+                                    <BoxView Color="#E2E8F0" HeightRequest="1"/>
+
+                                    <Label Text="{Binding ArticleContent}"
+                             TextColor="white"
+                             FontSize="16"
+                             
+                             FontFamily="Jersey15"
+                             LineBreakMode="TailTruncation"
+                             MaxLines="3"/>
+
+                                    <Button Text="Read More"
+                              TextColor="#4F46E5"
+                              BackgroundColor="Transparent"
+                              BorderColor="#4F46E5"
+                              BorderWidth="1"
+                              CornerRadius="4"
+                              Padding="12,8"
+                              HorizontalOptions="Start"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

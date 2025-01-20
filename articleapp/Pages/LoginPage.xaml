@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:freaky="clr-namespace:Maui.FreakyControls;assembly=Maui.FreakyControls"
+             xmlns:viewmodels="clr-namespace:articleapp.ViewModels"
              x:Class="articleapp.LoginPage"
-            >
+             x:DataType="viewmodels:LoginViewModel">
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -13,9 +14,7 @@
         </LinearGradientBrush>
     </ContentPage.Background>
 
-
     <ScrollView>
-        
         <Grid RowSpacing="0" 
               Padding="24,0"
               VerticalOptions="Center">
@@ -25,15 +24,10 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-           
-          
-             
-                <Image Source="laptop.gif"
-                  HeightRequest="200" 
-                  HorizontalOptions="Center" 
-                  IsAnimationPlaying="True"
-                 />
-         
+            <Image Source="laptop.gif"
+                   HeightRequest="200" 
+                   HorizontalOptions="Center" 
+                   IsAnimationPlaying="True"/>
 
             <VerticalStackLayout Grid.Row="1" Spacing="20">
                 <VerticalStackLayout Spacing="8">
@@ -41,7 +35,6 @@
                            TextColor="White"
                            FontSize="36"
                            FontFamily="Jersey15"
-                           
                            HorizontalOptions="Center" />
 
                     <Label Text="Sign in to your account"
@@ -52,49 +45,50 @@
                            Margin="0,0,0,20"/>
                 </VerticalStackLayout>
 
-     
                 <Frame BackgroundColor="#1E293B"
                        Padding="10,5"
                        CornerRadius="16"
                        HasShadow="False"
                        BorderColor="#334155">
                     <VerticalStackLayout Spacing="15">
-                        <freaky:FreakyEntry x:Name="emailEntry" 
-                                          Placeholder="Email"
-                                          TextColor="White"
-                                          PlaceholderColor="#64748B"
-                                          FontFamily="Jersey15"
-                                          Background="Transparent"
-                                          FontSize="20"
-                                          HeightRequest="50"/>
+                        <freaky:FreakyEntry 
+                            Text="{Binding Email}"
+                            Placeholder="Email"
+                            TextColor="White"
+                            PlaceholderColor="#64748B"
+                            FontFamily="Jersey15"
+                            Background="Transparent"
+                            FontSize="20"
+                            HeightRequest="50"/>
 
                         <BoxView Color="#334155" HeightRequest="1"/>
 
-                        <freaky:FreakyEntry x:Name="passwordEntry" 
-                                          Placeholder="Password"
-                                          TextColor="White"
-                                          PlaceholderColor="#64748B"
-                                          FontFamily="Jersey15"
-                                          Background="Transparent"
-                                          FontSize="20"
-                                          HeightRequest="50"
-                                          IsPassword="True"/>
+                        <freaky:FreakyEntry 
+                            Text="{Binding Password}"
+                            Placeholder="Password"
+                            TextColor="White"
+                            PlaceholderColor="#64748B"
+                            FontFamily="Jersey15"
+                            Background="Transparent"
+                            FontSize="20"
+                            HeightRequest="50"
+                            IsPassword="True"/>
                     </VerticalStackLayout>
                 </Frame>
 
-                <Label Text="Forgot Password?"
+                <Label Text="Forgot Password?(m3ndi mndirlk)"
                        TextColor="#4F46E5"
                        FontSize="18"
                        FontFamily="Jersey15"
                        HorizontalOptions="End"
                        Margin="0,5,0,10">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer/>
-                    </Label.GestureRecognizers>
+               
                 </Label>
 
-             
                 <Button Text="Sign In"
+                        Command="{Binding LoginCommand}"
+                      
+
                         TextColor="White"
                         FontFamily="Jersey15"
                         FontAttributes="Bold"
@@ -110,6 +104,7 @@
                     <Button.CornerRadius>28</Button.CornerRadius>
                 </Button>
 
+             
                 <HorizontalStackLayout HorizontalOptions="Center" 
                                      Spacing="5"
                                      Margin="0,20,0,40">
@@ -123,13 +118,11 @@
                            FontFamily="Jersey15"
                            FontSize="18">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer />
+                            <TapGestureRecognizer Command="{Binding SignUpCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Grid>
     </ScrollView>
-
-
 </ContentPage>
