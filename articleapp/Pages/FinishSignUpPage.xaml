@@ -38,21 +38,7 @@
                            Aspect="AspectFill"/>
                 </Frame>
 
-                <Button Text="Choose Photo"
-                        TextColor="White"
-                        FontFamily="Jersey15"
-                        FontSize="16"
-                        WidthRequest="200"
-                        HeightRequest="40"
-                        HorizontalOptions="Center">
-                    <Button.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Color="#4F46E5" Offset="0.0" />
-                            <GradientStop Color="#7C3AED" Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Button.Background>
-                    <Button.CornerRadius>20</Button.CornerRadius>
-                </Button>
+             
             </VerticalStackLayout>
 
             <!-- Hobbies Section Title -->
@@ -86,7 +72,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:HobbyModel">
                             <Frame CornerRadius="20" 
-                       BackgroundColor="#1E293B" 
+                       BackgroundColor="black"
                        Padding="10">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FinsishSignUpViewModel}}, Path=ToggleHobbyCommand}"

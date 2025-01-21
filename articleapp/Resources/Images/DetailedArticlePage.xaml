@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="articleapp.Pages.DetailedArticlePage"
+             Title="Article Details">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#000000" Offset="0.0" />
+            <GradientStop Color="#1a0b2e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowSpacing="0">
+        <!-- Hero Section with Blur Effect -->
+        <Image Source="{Binding ArticleDetails.CoverImage}"
+               Aspect="AspectFill"
+               HeightRequest="300"
+               Opacity="0.3">
+            <Image.Clip>
+                <RectangleGeometry Rect="0,0,1000,300"/>
+            </Image.Clip>
+        </Image>
+
+        <ScrollView>
+            <Grid RowSpacing="0">
+                <!-- Main Content Container -->
+                <VerticalStackLayout Spacing="0">
+                    <!-- Hero Content -->
+                    <Grid HeightRequest="300" 
+                          Padding="24,40"
+                          BackgroundColor="Transparent">
+                        <VerticalStackLayout VerticalOptions="End" Spacing="16">
+                            <!-- Category Badge -->
+                            <Frame BackgroundColor="#4F46E5"
+                                   Padding="16,8"
+                                   CornerRadius="20"
+                                   HasShadow="False"
+                                   HorizontalOptions="Start"
+                                   Opacity="0.9">
+                                <Label Text="{Binding ArticleDetails.CategoryName}"
+                                       TextColor="White"
+                                       FontFamily="Jersey15"
+                                       FontSize="14"/>
+                            </Frame>
+
+                            <!-- Title -->
+                            <Label Text="{Binding ArticleDetails.ArticleTitle}"
+                                   TextColor="White"
+                                   FontSize="40"
+                                   FontFamily="Jersey15"
+                                   FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <!-- Content Section -->
+                    <Frame BackgroundColor="#0D1117"
+                           CornerRadius="32"
+                           Margin="0,-32,0,0"
+                           HasShadow="True"
+                           BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="24" Padding="16,24">
+                            <!-- Author Info -->
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                                <Frame Grid.Column="0"
+                                       BackgroundColor="#1E293B"
+                                       CornerRadius="30"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       Padding="0"
+                                       IsClippedToBounds="True">
+                                    <Image Source="default_avatar.png"
+                                            Aspect="AspectFill"/>
+                                </Frame>
+
+                                <VerticalStackLayout Grid.Column="1" 
+                                                   Spacing="4"
+                                                   VerticalOptions="Center">
+                                    <Label Text="{Binding ArticleDetails.UserName}"
+                                           TextColor="White"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           FontFamily="Jersey15"/>
+                                    <Label Text="{Binding ArticleDetails.ArticleCreatedAt, StringFormat='{0:MMMM dd, yyyy}'}"
+                                           TextColor="#6B7280"
+                                           FontSize="14"
+                                           FontFamily="Jersey15"/>
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="2" 
+                                                     Spacing="20"
+                                                     VerticalOptions="Center">
+                                    <Image Source="share_icon.png" 
+                                           HeightRequest="24" 
+                                           WidthRequest="24"/>
+                                    <Image Source="bookmark_icon.png" 
+                                           HeightRequest="24" 
+                                           WidthRequest="24"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+
+                            <!-- Article Content -->
+                            <Label Text="{Binding ArticleDetails.ArticleContent}"
+                                   TextColor="#E5E7EB"
+                                   FontSize="18"
+                                   FontFamily="Jersey15"
+                                   LineHeight="1.8"/>
+
+                            <!-- Engagement Section -->
+                            <Frame BackgroundColor="#1E293B"
+                                   CornerRadius="16"
+                                   Padding="20"
+                                   Margin="0,16">
+                                <Grid ColumnDefinitions="Auto,Auto,*">
+                                    <Button Grid.Column="0"
+                                            Text="♥️ Like"
+                                            TextColor="White"
+                                            BackgroundColor="#4F46E5"
+                                            CornerRadius="20"
+                                            Padding="20,10"
+                                            Margin="0,0,12,0">
+
+                                    </Button>
+
+                                    <HorizontalStackLayout Grid.Column="1" 
+                                                         Spacing="20"
+                                                         VerticalOptions="Center">
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Image Source="like_icon.png" 
+                                                   HeightRequest="20" 
+                                                   WidthRequest="20"/>
+                                            <Label Text="{Binding ArticleDetails.NumberOfLikes}"
+                                                   TextColor="White"
+                                                   FontSize="16"
+                                                   FontFamily="Jersey15"/>
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Spacing="8">
+                                            <Image Source="comment.png" 
+                                                   HeightRequest="30" 
+                                                   WidthRequest="35"/>
+                                            <Label Text="{Binding ArticleDetails.NumberOfComments}"
+                                                   TextColor="White"
+                                                   FontSize="16"
+                                                   FontFamily="Jersey15"/>
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Frame>
+
+                            <!-- Comments Section -->
+                            <VerticalStackLayout Spacing="20">
+                                <Label Text="Comments"
+                                       TextColor="White"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       FontFamily="Jersey15"/>
+
+                                <CollectionView ItemsSource="{Binding ArticleDetails.Comments}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame BackgroundColor="#1E293B"
+                                                   Margin="0,0,0,16"
+                                                   Padding="20"
+                                                   CornerRadius="20"
+                                                   HasShadow="True">
+                                                <Grid RowSpacing="16">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+
+
+                                                    <Grid Grid.Row="0" 
+                                                          ColumnDefinitions="Auto,*,Auto" 
+                                                          ColumnSpacing="12">
+
+                                                        <Frame Grid.Column="0" 
+                                                               BackgroundColor="#1E293B"
+                                                               HeightRequest="40"
+                                                               WidthRequest="40"
+                                                               CornerRadius="20"
+                                                               Padding="0"
+                                                               IsClippedToBounds="True"
+                                                               Margin="0,0,12,0">
+
+                                                            <Image Source="default_avatar.png"
+                                                                   Aspect="AspectFill"/>
+                                                        </Frame>
+
+                                                        <VerticalStackLayout Grid.Column="1" 
+                                                                           Spacing="4"
+                                                                           VerticalOptions="Center">
+                                                            <Label Text="{Binding UserName}"
+                                                                   TextColor="White"
+                                                                   FontSize="16"
+                                                                   FontAttributes="Bold"
+                                                                   FontFamily="Jersey15"/>
+                                                            <Label Text="{Binding CommentId, StringFormat='#{0}'}"
+                                                                   TextColor="#6B7280"
+                                                                   FontSize="14"
+                                                                   FontFamily="Jersey15"/>
+                                                        </VerticalStackLayout>
+
+                                                        <Label Grid.Column="2"
+                                                               Text="2h ago"
+                                                               TextColor="#6B7280"
+                                                               FontSize="14"
+                                                               VerticalOptions="Center"/>
+                                                    </Grid>
+
+                                                    <!-- Comment Content -->
+                                                    <Label Grid.Row="1"
+                                                           Text="{Binding CommentContent}"
+                                                           TextColor="#E5E7EB"
+                                                           FontSize="16"
+                                                           FontFamily="Jersey15"
+                                                           LineHeight="1.6"/>
+
+                                                    <!-- Comment Actions -->
+                                                    <HorizontalStackLayout Grid.Row="2" 
+                                                                         Spacing="20">
+                                                        <Button Text="Reply"
+                                                                TextColor="#4F46E5"
+                                                                BackgroundColor="Transparent"
+                                                                FontSize="14"
+                                                                Padding="0"/>
+                                                        <HorizontalStackLayout Spacing="8">
+                                                            <Image Source="like.png" 
+                                                                   HeightRequest="16" 
+                                                                   WidthRequest="16"/>
+                                                            <Label Text="{Binding NumberOfLikes}"
+                                                                   TextColor="#6B7280"
+                                                                   FontSize="14"
+                                                                   FontFamily="Jersey15"/>
+                                                        </HorizontalStackLayout>
+                                                    </HorizontalStackLayout>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

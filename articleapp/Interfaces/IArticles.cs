@@ -14,11 +14,11 @@ namespace articleapp.Interfaces
         Task<string> DeleteArticle(int articleId, string? token = null);
         Task<string> DeleteLikeArticle(LikeArticleModel likeArticle, string? token = null);
         Task<List<BasicArticleWithDetails>> GetAllArticles(string? token = null);
-        Task<List<BasicArticleWithDetails>> GetAllArticlesByUser(string? token = null, int? userId = 14);
+        Task<List<BasicArticleWithDetails>> GetAllArticlesByUser(int userId,string? token = null );
 
 
         // Saved articles
-        Task<List<BasicArticleWithDetails>> GetSavedArticlesByUser(string? token = null, int? userId = 14);
+        Task<List<BasicArticleWithDetails>> GetSavedArticlesByUser(int userId,string? token = null);
        
     }
 }

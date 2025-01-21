@@ -27,17 +27,11 @@
                        Padding="0"
                        IsClippedToBounds="True"
                        HorizontalOptions="Center"
-                       BorderColor="#4F46E5">
+                      >
                     <Grid>
                         <Image Aspect="AspectFill"
-                               Source="{Binding UserImage}"/>
-                        <Button Text="Edit"
-                                BackgroundColor="#4F46E5"
-                                TextColor="White"
-                                FontFamily="Jersey15"
-                                VerticalOptions="End"
-                                HeightRequest="40"
-                                Opacity="0.9"/>
+                               Source="default_avatar.png"/>
+                     
                     </Grid>
                 </Frame>
 
@@ -83,9 +77,9 @@
                 </FlexLayout>
             </Grid>
 
-            <!-- Articles Tabs Section -->
+         
             <Grid RowDefinitions="Auto,*">
-                <!-- Tab Headers -->
+             
                 <Grid Grid.Row="0" 
                       ColumnDefinitions="*,*" 
                       Margin="0,0,0,15">
@@ -131,63 +125,146 @@
 
                 <!-- Tab Content -->
                 <CollectionView Grid.Row="2" 
-                  ItemsSource="{Binding CurrentArticles}"
-                  IsVisible="true">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
-                    </CollectionView.ItemsLayout>
+     ItemsSource="{Binding CurrentArticles}"
+     SelectionMode="Single"
+     SelectionChanged="OnArticleSelected"
+     Margin="0,20,0,0">
+                    <CollectionView.EmptyView>
+                        <Label Text="No articles found"
+    TextColor="White"
+    HorizontalOptions="Center"
+    VerticalOptions="Center"/>
+                    </CollectionView.EmptyView>
+                    <CollectionView.Header>
+                        <BoxView HeightRequest="1" IsVisible="false"/>
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <BoxView HeightRequest="16" IsVisible="false"/>
+                    </CollectionView.Footer>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame BackgroundColor="#1E293B"
-                     Padding="16"
-                     CornerRadius="8"
-                     HasShadow="True">
-                                <VerticalStackLayout Spacing="12">
-                                    <Label Text="{Binding ArticleTitle}"
-                             TextColor="white"
-                             FontSize="22"
-                             FontFamily="Jersey15"
-                            
-                             LineBreakMode="TailTruncation"
-                             MaxLines="2"/>
+                            <Grid Padding="0,0,0,16">
+                                <Frame BackgroundColor="#0F172A"
+            Padding="20"
+            CornerRadius="16"
+            BorderColor="#1E293B"
+            Margin="16,0">
 
-                                    <HorizontalStackLayout Spacing="8">
-                                        <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
-                                 TextColor="white"
-                                 
-                             FontFamily="Jersey15"
-                                 FontSize="14"/>
-                                        <Label Text="•"
-                                 TextColor="white"
-                                 FontSize="14"/>
-                                        <Label Text="{Binding CategoryId, StringFormat='Category {0}'}"
-                                 TextColor="#4F46E5"
-                                 FontSize="14"
-                                 
-                             FontFamily="Jersey15"
-                                 />
-                                    </HorizontalStackLayout>
+                                    <!-- Main Content Layout -->
+                                    <Grid RowSpacing="16">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
 
-                                    <BoxView Color="#E2E8F0" HeightRequest="1"/>
+                                        <!-- Author Info and Category -->
+                                        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,4">
+                                            <!-- Author Avatar -->
+                                            <Frame Grid.Column="0"
+                        BackgroundColor="#1E293B"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        CornerRadius="20"
+                        Padding="0"
+                        IsClippedToBounds="True"
+                        Margin="0,0,12,0">
+                                                <Image Source="default_avatar.png"
+                            Aspect="AspectFill"/>
+                                            </Frame>
 
-                                    <Label Text="{Binding ArticleContent}"
-                             TextColor="white"
-                             FontSize="16"
-                             
-                             FontFamily="Jersey15"
-                             LineBreakMode="TailTruncation"
-                             MaxLines="3"/>
+                                            <!-- Author Details -->
+                                            <StackLayout Grid.Column="1" 
+                            Spacing="2"
+                            VerticalOptions="Center">
+                                                <Label Text="{Binding UserName}"
+                            TextColor="White"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            FontFamily="Jersey15"/>
+                                                <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
+                            TextColor="#64748B"
+                            FontSize="12"
+                            FontFamily="Jersey15"/>
+                                            </StackLayout>
 
-                                    <Button Text="Read More"
-                              TextColor="#4F46E5"
-                              BackgroundColor="Transparent"
-                              BorderColor="#4F46E5"
-                              BorderWidth="1"
-                              CornerRadius="4"
-                              Padding="12,8"
-                              HorizontalOptions="Start"/>
-                                </VerticalStackLayout>
-                            </Frame>
+                                         
+                                            <Frame Grid.Column="2"
+                        BackgroundColor="Transparent"
+                                                   BorderColor="Transparent"
+                        Padding="12,6"
+                        CornerRadius="20"
+                        HasShadow="False">
+                                                <Label Text="{Binding CategoryName}"
+                            TextColor="AliceBlue"
+                            FontSize="16"
+                                                       
+                            FontAttributes="Bold"
+                            FontFamily="Jersey15"/>
+                                            </Frame>
+                                        </Grid>
+
+                                       
+                                        <StackLayout Grid.Row="1" Spacing="12">
+                                            <Label Text="{Binding ArticleTitle}"
+                        TextColor="White"
+                        FontSize="22"
+                        FontFamily="Jersey15"
+                        FontAttributes="Bold"
+                        LineHeight="1.4"/>
+
+                                            <Label Text="{Binding ArticleContent}"
+                        TextColor="#CBD5E1"
+                        FontSize="15"
+                        LineHeight="1.6"
+                        MaxLines="3"
+                        LineBreakMode="TailTruncation"/>
+                                        </StackLayout>
+
+                                        <FlexLayout Grid.Row="2" 
+                       JustifyContent="Start"
+                       AlignItems="Center" 
+                       Wrap="NoWrap">
+                                     
+                                            <Frame BackgroundColor="#1E293B"
+                        Padding="12,8"
+                        CornerRadius="20"
+                        HasShadow="False"
+                        Margin="0,0,12,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Image Source="comment.png"
+                                HeightRequest="18"
+                                WidthRequest="18"/>
+                                                    <Label Text="{Binding NumberOfComments}"
+                                TextColor="#A5B4FC"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                FontFamily="Jersey15"
+                                VerticalOptions="Center"/>
+                                                </StackLayout>
+                                            </Frame>
+
+
+                                            <Frame BackgroundColor="#1E293B"
+                        Padding="12,8"
+                        CornerRadius="20"
+                        HasShadow="False">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Image Source="heart.png"
+                                HeightRequest="18"
+                                WidthRequest="18"/>
+                                                    <Label Text="{Binding NumberOfLikes}"
+                                TextColor="#A5B4FC"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                FontFamily="Jersey15"
+                                VerticalOptions="Center"/>
+                                                </StackLayout>
+                                            </Frame>
+                                        </FlexLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

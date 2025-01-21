@@ -11,6 +11,7 @@ namespace articleapp.ViewModels
     {
         private readonly UserRepo _userRepo;
         private readonly ArticleRepo _articleRepo;
+        private UserModel Userdata;
         [ObservableProperty]
         private string userName;
         [ObservableProperty]
@@ -21,9 +22,8 @@ namespace articleapp.ViewModels
         [ObservableProperty]
         private ObservableCollection<string> hobbies;
         [ObservableProperty]
-        private ObservableCollection<ArticleModel> currentArticles;
-        [ObservableProperty]
-        private Dictionary<int, string> articleCategories;
+        private ObservableCollection<BasicArticleWithDetails> currentArticles;
+
         [ObservableProperty]
         private bool myArticlesSelected;
         [ObservableProperty]
@@ -34,8 +34,8 @@ namespace articleapp.ViewModels
             _userRepo = userRepo;
             _articleRepo = articleRepo;
             Hobbies = new ObservableCollection<string>();
-            CurrentArticles = new ObservableCollection<ArticleModel>();
-            ArticleCategories = new Dictionary<int, string>();
+            CurrentArticles = new ObservableCollection<BasicArticleWithDetails>();
+           
             MyArticlesSelected = true;
             SavedArticlesSelected = false;
             InitializeAsync();
@@ -49,13 +49,14 @@ namespace articleapp.ViewModels
         private async Task LoadUserDataAsync()
         {
             var userData = await GetUserData();
+            Userdata = userData;
             var userFollower = await GetUserFollowers();
             var userHobbies = await GetUserHobbies();
 
             if (userData != null)
             {
                 UserName = $"{userData.UserName} {userData.UserFamilyName}";
-                UserImage = userData.UserImage ?? "placeholder_pfp.jpg";
+                
                 FollowingCount = userFollower.Count;
 
                 if (userHobbies != null)
@@ -85,14 +86,14 @@ namespace articleapp.ViewModels
             return await _userRepo.GetUserHobby();
         }
 
-        private async Task<List<ArticleModel>> GetUserArticles()
+        private async Task<List<BasicArticleWithDetails>> GetUserArticles(int userId)
         {
-            return await _articleRepo.GetAllArticlesByUser();
+            return await _articleRepo.GetAllArticlesByUser(userId);
         }
 
-        private async Task<List<ArticleModel>> GetUserSavedArticles()
+        private async Task<List<BasicArticleWithDetails>> GetUserSavedArticles(int userId)
         {
-            return await _articleRepo.GetSavedArticlesByUser();
+            return await _articleRepo.GetSavedArticlesByUser(userId);
         }
 
 
@@ -105,25 +106,40 @@ namespace articleapp.ViewModels
                 MyArticlesSelected = myArticles;
                 SavedArticlesSelected = !myArticles;
                 CurrentArticles.Clear();
-                ArticleCategories.Clear();
+               
 
-                List<ArticleModel> articles;
+                List<BasicArticleWithDetails> articles;
                 if (myArticles)
                 {
-                    articles = await GetUserArticles();
+                    articles = await GetUserArticles(Userdata.UserId);
                 }
                 else
                 {
-                    articles = await GetUserSavedArticles();
+                    articles = await GetUserSavedArticles(Userdata.UserId);
                 }
 
-              
+                foreach (var article in articles)
+                {
+                   
+                    CurrentArticles.Add(new BasicArticleWithDetails
+                    {
+                        ArticleId = article.ArticleId,
+                        ArticleTitle = article.ArticleTitle,
+                        ArticleContent = article.ArticleContent,
+                        ArticleCreatedAt = article.ArticleCreatedAt,
+                        NumberOfComments = article.NumberOfComments,
+                        NumberOfLikes = article.NumberOfLikes,
+                        CategoryName = article.CategoryName,
+                        UserName = article.UserName,
+                    });
+                }
             }
             catch (Exception ex)
             {
                 Log.Information($"{ex.Message}");
             }
         }
+
 
         [RelayCommand]
         private async Task ShowMyArticles()
@@ -137,12 +153,6 @@ namespace articleapp.ViewModels
             await LoadArticles(false);
         }
 
-        // Helper method to get category name for an article
-        public string GetCategoryNameForArticle(int articleId)
-        {
-            return ArticleCategories.TryGetValue(articleId, out string categoryName)
-                ? categoryName
-                : "Uncategorized";
-        }
+     
     }
 }

@@ -50,6 +50,7 @@ namespace articleapp
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<SignupViewModel>();
+            builder.Services.AddTransient<DetailedArticeleViewModel>();
             builder.Services.AddScoped<IUser, UserRepo>();
             builder.Services.AddScoped<IComments, CommentRepo>();
             builder.Services.AddScoped<IArticles, ArticleRepo>();
@@ -59,6 +60,8 @@ namespace articleapp
             builder.Services.AddTransient<UserRepo>();
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<SignupPage>();
+            builder.Services.AddTransient<SearchModal>();
+            builder.Services.AddTransient<DetailedArticleP>();
             builder.Services.AddTransient<FinishSignUpPage>();
             builder.Services.AddTransient<MainArticlePage>();
             builder.Services.AddTransient<LoginPage>();

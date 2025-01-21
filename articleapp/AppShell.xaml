@@ -25,9 +25,7 @@
         <Tab Title="Login">
             <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="Login" />
         </Tab>
-        <Tab Title="Article">
-            <ShellContent ContentTemplate="{DataTemplate local:SpecificArticle}" Route="spArticle" />
-        </Tab>
+     
     </TabBar>
 
 </Shell>

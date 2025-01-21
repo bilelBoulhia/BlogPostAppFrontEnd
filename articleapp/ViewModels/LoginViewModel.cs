@@ -72,6 +72,7 @@ namespace articleapp.ViewModels
                
                     var toast = Toast.Make("Signed in", ToastDuration.Short, 16);
                     await toast.Show();
+                    await Shell.Current.GoToAsync("Main");
                 }
             }
             catch (Exception ex)

@@ -9,9 +9,9 @@ public partial class MainPageViewModel : ObservableObject
 {
     private readonly ArticleRepo _articleRepo;
     [ObservableProperty]
-    private ObservableCollection<CategoryModel> _categories;  // Ensure it is a collection of CategoryModel
+    private ObservableCollection<CategoryModel> _categories;  
     [ObservableProperty]
-    private ObservableCollection<ArticleModel> _articles;
+    private ObservableCollection<BasicArticleWithDetails> _articles;
     [ObservableProperty]
     private string _searchText;
 
@@ -27,7 +27,7 @@ public partial class MainPageViewModel : ObservableObject
         var categoriesList = await GetAllCategories();
         Categories = new ObservableCollection<CategoryModel>(categoriesList);
         var articlesList = await GetAllArticles();
-        Articles = new ObservableCollection<ArticleModel>(articlesList);
+        Articles = new ObservableCollection<BasicArticleWithDetails>(articlesList);
     }
 
     private async Task<List<CategoryModel>> GetAllCategories()
@@ -35,15 +35,10 @@ public partial class MainPageViewModel : ObservableObject
         return await _articleRepo.GetAllCategory();
     }
 
-    private async Task<List<ArticleModel>> GetAllArticles()
+    private async Task<List<BasicArticleWithDetails>> GetAllArticles()
     {
         return await _articleRepo.GetAllArticles();
     }
 
-    [RelayCommand]
-    private async Task SearchArticles()
-    {
-
-        
-    }
+   
 }

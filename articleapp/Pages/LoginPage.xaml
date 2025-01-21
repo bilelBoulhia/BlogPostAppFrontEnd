@@ -45,7 +45,7 @@
                            Margin="0,0,0,20"/>
                 </VerticalStackLayout>
 
-                <Frame BackgroundColor="#1E293B"
+                <Frame BackgroundColor="black"
                        Padding="10,5"
                        CornerRadius="16"
                        HasShadow="False"
