@@ -9,7 +9,7 @@ namespace articleapp.Interfaces
 {
     interface IArticles
     {
-        Task<ArticleModel> PostArticle(ArticleModel articleModel, string? token = null);
+        Task<string> PostArticle(ArticleModel articleModel, string? token = null);
         Task<LikeArticleModel> PostArticleLike(LikeArticleModel likearticleModel, string? token = null);
         Task<string> DeleteArticle(int articleId, string? token = null);
         Task<string> DeleteLikeArticle(LikeArticleModel likeArticle, string? token = null);

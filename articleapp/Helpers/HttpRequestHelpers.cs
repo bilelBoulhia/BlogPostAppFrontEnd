@@ -68,17 +68,26 @@ namespace articleapp.Helpers
 
 
                     var response = await client.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
+                   
                     string jsonString = await response.Content.ReadAsStringAsync();
 
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     };
-                    
-                    return JsonSerializer.Deserialize<T>(jsonString, options);
-                    
-                 
+
+                    try
+                    {
+                        return JsonSerializer.Deserialize<T>(jsonString, options);
+                    }
+                    catch
+                    {
+                        // Return default value for the type T
+                        return default;
+                    }
+
+
+
                 }
             }
             catch (HttpRequestException e)

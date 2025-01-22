@@ -9,7 +9,7 @@ public partial class ArticleModel
     public string ArticleTitle { get; set; } 
     public string ArticleContent { get; set; }
     public DateTime ArticleCreatedAt { get; set; } 
-    public DateTime ArticleModifiedAt { get; set; }
+
     public int UserId { get; set; } 
     public int CategoryId { get; set; }
 

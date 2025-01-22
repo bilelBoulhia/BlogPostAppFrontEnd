@@ -105,7 +105,8 @@ namespace articleapp.ViewModels
             {
                 MyArticlesSelected = myArticles;
                 SavedArticlesSelected = !myArticles;
-                CurrentArticles.Clear();
+                if(CurrentArticles != null) { CurrentArticles.Clear(); } else { CurrentArticles = new ObservableCollection<BasicArticleWithDetails>(); }
+
                
 
                 List<BasicArticleWithDetails> articles;
@@ -118,21 +119,25 @@ namespace articleapp.ViewModels
                     articles = await GetUserSavedArticles(Userdata.UserId);
                 }
 
-                foreach (var article in articles)
+                if(articles != null)
                 {
-                   
-                    CurrentArticles.Add(new BasicArticleWithDetails
+                    foreach (var article in articles)
                     {
-                        ArticleId = article.ArticleId,
-                        ArticleTitle = article.ArticleTitle,
-                        ArticleContent = article.ArticleContent,
-                        ArticleCreatedAt = article.ArticleCreatedAt,
-                        NumberOfComments = article.NumberOfComments,
-                        NumberOfLikes = article.NumberOfLikes,
-                        CategoryName = article.CategoryName,
-                        UserName = article.UserName,
-                    });
-                }
+
+                        CurrentArticles?.Add(new BasicArticleWithDetails
+                        {
+                            ArticleId = article.ArticleId,
+                            ArticleTitle = article.ArticleTitle,
+                            ArticleContent = article.ArticleContent,
+                            ArticleCreatedAt = article.ArticleCreatedAt,
+                            NumberOfComments = article.NumberOfComments,
+                            NumberOfLikes = article.NumberOfLikes,
+                            CategoryName = article.CategoryName,
+                            UserName = article.UserName,
+                        });
+                    }
+                } else { currentArticles = null; };
+               
             }
             catch (Exception ex)
             {

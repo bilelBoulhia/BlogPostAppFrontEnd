@@ -30,6 +30,13 @@ public partial class MainPageViewModel : ObservableObject
         Articles = new ObservableCollection<BasicArticleWithDetails>(articlesList);
     }
 
+
+    [RelayCommand]
+    private async Task NavigateToAddArticle()
+    {
+        await Shell.Current.GoToAsync("AddPageArticle");
+    }
+
     private async Task<List<CategoryModel>> GetAllCategories()
     {
         return await _articleRepo.GetAllCategory();

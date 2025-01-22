@@ -4,7 +4,9 @@
              xmlns:freaky="clr-namespace:Maui.FreakyControls;assembly=Maui.FreakyControls"
              xmlns:viewmodels="clr-namespace:articleapp.ViewModels"
              x:Class="articleapp.LoginPage"
-             x:DataType="viewmodels:LoginViewModel">
+             x:DataType="viewmodels:LoginViewModel"
+        Shell.TabBarIsVisible="False"
+             >
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">

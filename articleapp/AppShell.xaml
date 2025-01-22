@@ -9,23 +9,39 @@
     Shell.NavBarIsVisible="False"
     Title="articleapp">
 
+    <Shell.Resources>
+        <Style TargetType="TabBar">
+            <Setter Property="Shell.TabBarBackgroundColor" Value="black"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="#B3FFFFFF"/>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#B3FFFFFF"/>
+        
+        </Style>
+    </Shell.Resources>
+
     <TabBar>
         <Tab Title="Home">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="MaterialIcons"
+                    Glyph="&#xe88a;"
+                    Color="#B3FFFFFF"
+                    Size="24" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:MainArticlePage}" Route="Main" />
         </Tab>
+
         <Tab Title="Profile">
+            <Tab.Icon>
+                <FontImageSource
+                    FontFamily="MaterialIcons"
+                    Glyph="&#xe853;"
+                    Color="#B3FFFFFF"
+                    Size="24" />
+            </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" Route="Profile" />
         </Tab>
-        <Tab Title="Sign Up">
-            <ShellContent ContentTemplate="{DataTemplate local:SignupPage}" Route="SignUp" />
-        </Tab>
-        <Tab Title="Finish Sign Up">
-            <ShellContent ContentTemplate="{DataTemplate local:FinishSignUpPage}" Route="finishSignUp" />
-        </Tab>
-        <Tab Title="Login">
-            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="Login" />
-        </Tab>
-     
+
+        
     </TabBar>
 
 </Shell>

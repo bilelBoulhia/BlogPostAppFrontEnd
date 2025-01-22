@@ -22,10 +22,6 @@ namespace articleapp
         public static MauiApp CreateMauiApp()
         {
 
-            //DotEnv.Load(options: new DotEnvOptions(probeForEnv: true));
-            //Cloudinary cloudinary = new Cloudinary(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
-            //cloudinary.Api.Secure = true;
-
 
             var builder = MauiApp.CreateBuilder();
 
@@ -40,15 +36,19 @@ namespace articleapp
                     fonts.AddFont("Jersey15-Regular.ttf", "Jersey15");
                     fonts.AddFont("fa-brands-400.ttf", "faBrands");
                     fonts.AddFont("fa-solid-900.ttf", "faSolid");
+                    fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
                 });
 
 
 
 
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<AddArticleModelView>();
             builder.Services.AddTransient<FinsishSignUpViewModel>();
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<ProfileViewModel>();
+            builder.Services.AddTransient<SearchViewModel>();
+            builder.Services.AddTransient<OtherPoepleViewModel>();
             builder.Services.AddTransient<SignupViewModel>();
             builder.Services.AddTransient<DetailedArticeleViewModel>();
             builder.Services.AddScoped<IUser, UserRepo>();
@@ -56,12 +56,16 @@ namespace articleapp
             builder.Services.AddScoped<IArticles, ArticleRepo>();
             builder.Services.AddSingleton<AuthContext>();
             builder.Services.AddTransient<CommentRepo>();
+            
             builder.Services.AddTransient<ArticleRepo>();
             builder.Services.AddTransient<UserRepo>();
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<SignupPage>();
             builder.Services.AddTransient<SearchModal>();
             builder.Services.AddTransient<DetailedArticleP>();
+            builder.Services.AddTransient<AddPageArticel>();
+ 
+            builder.Services.AddTransient<OtherPoeplePage>();
             builder.Services.AddTransient<FinishSignUpPage>();
             builder.Services.AddTransient<MainArticlePage>();
             builder.Services.AddTransient<LoginPage>();

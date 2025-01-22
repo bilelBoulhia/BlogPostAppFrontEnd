@@ -1,12 +1,89 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:articleapp.ViewModels"
              x:Class="articleapp.Pages.AddPageArticel"
-             Title="AddPageArticel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="viewmodels:AddArticleModelView"
+             Shell.TabBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0a0426" Offset="0.5" />
+            <GradientStop Color="#000000" Offset="0.0" />
+            <GradientStop Color="#1a0b2e" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+        <Grid RowSpacing="0" 
+              Padding="24,0"
+              VerticalOptions="Start"
+              Margin="0,40,0,0">
+
+            <VerticalStackLayout Spacing="20">
+                <Label Text="Create Article"
+                       TextColor="White"
+                       FontSize="36"
+                       FontFamily="Jersey15"
+                       HorizontalOptions="Center" />
+
+                <Frame BackgroundColor="black"
+                       Padding="15"
+                       CornerRadius="16"
+                       HasShadow="False"
+                       BorderColor="#334155">
+                    <VerticalStackLayout Spacing="15">
+                        <Entry Text="{Binding ArticleTitle}"
+                               Placeholder="Article Title"
+                               TextColor="White"
+                               PlaceholderColor="#64748B"
+                               FontFamily="Jersey15"
+                               BackgroundColor="Transparent"
+                               FontSize="20"/>
+
+                        <BoxView Color="#334155" HeightRequest="1"/>
+
+                        <Editor Text="{Binding ArticleContent}"
+                                Placeholder="Article Content"
+                                TextColor="White"
+                                PlaceholderColor="#64748B"
+                                FontFamily="Jersey15"
+                                BackgroundColor="Transparent"
+                                FontSize="18"
+                                HeightRequest="200"
+                                AutoSize="TextChanges"/>
+
+                        <BoxView Color="#334155" HeightRequest="1"/>
+
+                        <Picker Title="Select Category"
+                                ItemsSource="{Binding Categories}"
+                                ItemDisplayBinding="{Binding CategoryName}"
+                                SelectedItem="{Binding SelectedCategory}"
+                                TitleColor="#64748B"
+                                TextColor="White"
+                                FontFamily="Jersey15"
+                                BackgroundColor="Transparent"
+                                FontSize="20"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="Create Article"
+                        Command="{Binding CreateArticleCommand}"
+                        TextColor="White"
+                        FontFamily="Jersey15"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        HeightRequest="56"
+                        Margin="0,10">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#4F46E5" Offset="0.0" />
+                            <GradientStop Color="#7C3AED" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.CornerRadius>28</Button.CornerRadius>
+                </Button>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

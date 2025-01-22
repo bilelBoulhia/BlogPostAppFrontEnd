@@ -10,7 +10,8 @@ namespace articleapp
             Routing.RegisterRoute("DetailedArticle", typeof(DetailedArticleP));
             Routing.RegisterRoute("SignUp", typeof(SignupPage));
             Routing.RegisterRoute("Main", typeof(MainArticlePage));
-         
+            Routing.RegisterRoute("AddPageArticle", typeof(AddPageArticel));
+
             Routing.RegisterRoute("finishSignUp", typeof(FinishSignUpPage));
             Routing.RegisterRoute("Profile", typeof(ProfilePage));
             Routing.RegisterRoute("Login", typeof(LoginPage));

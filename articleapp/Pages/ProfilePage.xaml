@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:articleapp.ViewModels"
-             x:Class="articleapp.Pages.ProfilePage">
+             x:Class="articleapp.Pages.ProfilePage"
+             
+             >
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -26,18 +28,16 @@
                        CornerRadius="60"
                        Padding="0"
                        IsClippedToBounds="True"
-                       HorizontalOptions="Center"
-                      >
+                       HorizontalOptions="Center">
                     <Grid>
                         <Image Aspect="AspectFill"
                                Source="default_avatar.png"/>
-                     
                     </Grid>
                 </Frame>
 
                 <VerticalStackLayout Grid.Row="1" 
-                                   Spacing="10" 
-                                   HorizontalOptions="Center">
+                                     Spacing="10" 
+                                     HorizontalOptions="Center">
                     <Label Text="{Binding UserName}"
                            TextColor="White"
                            FontSize="24"
@@ -53,8 +53,6 @@
                                 BorderColor="#4F46E5"
                                 BorderWidth="1"
                                 CornerRadius="20"/>
-
-
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
 
@@ -77,9 +75,7 @@
                 </FlexLayout>
             </Grid>
 
-         
             <Grid RowDefinitions="Auto,*">
-             
                 <Grid Grid.Row="0" 
                       ColumnDefinitions="*,*" 
                       Margin="0,0,0,15">
@@ -104,8 +100,8 @@
                             <Label Text="My Articles" 
                                    TextColor="White"/>
                             <BoxView HeightRequest="2" 
-                                    BackgroundColor="#4F46E5"
-                                    IsVisible="{Binding MyArticlesSelected}"/>
+                                     BackgroundColor="#4F46E5"
+                                     IsVisible="{Binding MyArticlesSelected}"/>
                         </VerticalStackLayout>
                     </Frame>
 
@@ -117,23 +113,22 @@
                             <Label Text="Saved Articles" 
                                    TextColor="White"/>
                             <BoxView HeightRequest="2" 
-                                    BackgroundColor="#4F46E5"
-                                    IsVisible="{Binding SavedArticlesSelected}"/>
+                                     BackgroundColor="#4F46E5"
+                                     IsVisible="{Binding SavedArticlesSelected}"/>
                         </VerticalStackLayout>
                     </Frame>
                 </Grid>
 
-                <!-- Tab Content -->
                 <CollectionView Grid.Row="2" 
-     ItemsSource="{Binding CurrentArticles}"
-     SelectionMode="Single"
-     SelectionChanged="OnArticleSelected"
-     Margin="0,20,0,0">
+                                ItemsSource="{Binding CurrentArticles}"
+                                SelectionMode="Single"
+                                SelectionChanged="OnArticleSelected"
+                                Margin="0,20,0,0">
                     <CollectionView.EmptyView>
                         <Label Text="No articles found"
-    TextColor="White"
-    HorizontalOptions="Center"
-    VerticalOptions="Center"/>
+                               TextColor="White"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
                     </CollectionView.EmptyView>
                     <CollectionView.Header>
                         <BoxView HeightRequest="1" IsVisible="false"/>
@@ -144,13 +139,11 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid Padding="0,0,0,16">
-                                <Frame BackgroundColor="#0F172A"
-            Padding="20"
-            CornerRadius="16"
-            BorderColor="#1E293B"
-            Margin="16,0">
-
-                                    <!-- Main Content Layout -->
+                                <Frame BackgroundColor="black"
+                                       Padding="20"
+                                       CornerRadius="16"
+                                       BorderColor="#1E293B"
+                                       Margin="16,0">
                                     <Grid RowSpacing="16">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -158,107 +151,123 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <!-- Author Info and Category -->
                                         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,4">
-                                            <!-- Author Avatar -->
                                             <Frame Grid.Column="0"
-                        BackgroundColor="#1E293B"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        CornerRadius="20"
-                        Padding="0"
-                        IsClippedToBounds="True"
-                        Margin="0,0,12,0">
+                                                   BackgroundColor="#1E293B"
+                                                   HeightRequest="40"
+                                                   WidthRequest="40"
+                                                   CornerRadius="20"
+                                                   Padding="0"
+                                                   IsClippedToBounds="True"
+                                                   Margin="0,0,12,0">
                                                 <Image Source="default_avatar.png"
-                            Aspect="AspectFill"/>
+                                                       Aspect="AspectFill"/>
                                             </Frame>
 
-                                            <!-- Author Details -->
                                             <StackLayout Grid.Column="1" 
-                            Spacing="2"
-                            VerticalOptions="Center">
+                                                         Spacing="2"
+                                                         VerticalOptions="Center">
                                                 <Label Text="{Binding UserName}"
-                            TextColor="White"
-                            FontSize="14"
-                            FontAttributes="Bold"
-                            FontFamily="Jersey15"/>
+                                                       TextColor="White"
+                                                       FontSize="14"
+                                                       FontAttributes="Bold"
+                                                       FontFamily="Jersey15"/>
                                                 <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
-                            TextColor="#64748B"
-                            FontSize="12"
-                            FontFamily="Jersey15"/>
+                                                       TextColor="#64748B"
+                                                       FontSize="12"
+                                                       FontFamily="Jersey15"/>
                                             </StackLayout>
 
-                                         
                                             <Frame Grid.Column="2"
-                        BackgroundColor="Transparent"
-                                                   BorderColor="Transparent"
-                        Padding="12,6"
-                        CornerRadius="20"
-                        HasShadow="False">
+                                                   Padding="16,8"
+                                                   CornerRadius="12"
+                                                   HasShadow="False"
+                                                   IsClippedToBounds="True">
+                                                <Frame.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#1E293B" Offset="0.0" />
+                                                        <GradientStop Color="#2D3A4F" Offset="1.0" />
+                                                    </LinearGradientBrush>
+                                                </Frame.Background>
+
+                                                <Frame.Shadow>
+                                                    <Shadow Brush="#000000"
+                                                            Offset="0,2"
+                                                            Opacity="0.2"
+                                                            Radius="4" />
+                                                </Frame.Shadow>
                                                 <Label Text="{Binding CategoryName}"
-                            TextColor="AliceBlue"
-                            FontSize="16"
-                                                       
-                            FontAttributes="Bold"
-                            FontFamily="Jersey15"/>
+                                                       TextColor="#A5B4FC"
+                                                       FontSize="14"
+                                                       FontAttributes="Bold"
+                                                       FontFamily="Jersey15"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center">
+                                                    <Label.Shadow>
+                                                        <Shadow Brush="#000000"
+                                                                Offset="0,1"
+                                                                Opacity="0.3"
+                                                                Radius="2" />
+                                                    </Label.Shadow>
+                                                </Label>
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding TapCommand}"/>
+                                                </Frame.GestureRecognizers>
                                             </Frame>
                                         </Grid>
 
-                                       
                                         <StackLayout Grid.Row="1" Spacing="12">
                                             <Label Text="{Binding ArticleTitle}"
-                        TextColor="White"
-                        FontSize="22"
-                        FontFamily="Jersey15"
-                        FontAttributes="Bold"
-                        LineHeight="1.4"/>
+                                                   TextColor="White"
+                                                   FontSize="22"
+                                                   FontFamily="Jersey15"
+                                                   FontAttributes="Bold"
+                                                   LineHeight="1.4"/>
 
                                             <Label Text="{Binding ArticleContent}"
-                        TextColor="#CBD5E1"
-                        FontSize="15"
-                        LineHeight="1.6"
-                        MaxLines="3"
-                        LineBreakMode="TailTruncation"/>
+                                                   TextColor="#CBD5E1"
+                                                   FontSize="15"
+                                                   LineHeight="1.6"
+                                                   MaxLines="3"
+                                                   LineBreakMode="TailTruncation"/>
                                         </StackLayout>
 
                                         <FlexLayout Grid.Row="2" 
-                       JustifyContent="Start"
-                       AlignItems="Center" 
-                       Wrap="NoWrap">
-                                     
+                                                    JustifyContent="Start"
+                                                    AlignItems="Center" 
+                                                    Wrap="NoWrap">
                                             <Frame BackgroundColor="#1E293B"
-                        Padding="12,8"
-                        CornerRadius="20"
-                        HasShadow="False"
-                        Margin="0,0,12,0">
+                                                   Padding="12,8"
+                                                   CornerRadius="20"
+                                                   HasShadow="False"
+                                                   Margin="0,0,12,0">
                                                 <StackLayout Orientation="Horizontal" Spacing="8">
                                                     <Image Source="comment.png"
-                                HeightRequest="18"
-                                WidthRequest="18"/>
+                                                           HeightRequest="18"
+                                                           WidthRequest="18"/>
                                                     <Label Text="{Binding NumberOfComments}"
-                                TextColor="#A5B4FC"
-                                FontSize="13"
-                                FontAttributes="Bold"
-                                FontFamily="Jersey15"
-                                VerticalOptions="Center"/>
+                                                           TextColor="#A5B4FC"
+                                                           FontSize="13"
+                                                           FontAttributes="Bold"
+                                                           FontFamily="Jersey15"
+                                                           VerticalOptions="Center"/>
                                                 </StackLayout>
                                             </Frame>
 
-
                                             <Frame BackgroundColor="#1E293B"
-                        Padding="12,8"
-                        CornerRadius="20"
-                        HasShadow="False">
+                                                   Padding="12,8"
+                                                   CornerRadius="20"
+                                                   HasShadow="False">
                                                 <StackLayout Orientation="Horizontal" Spacing="8">
                                                     <Image Source="heart.png"
-                                HeightRequest="18"
-                                WidthRequest="18"/>
+                                                           HeightRequest="18"
+                                                           WidthRequest="18"/>
                                                     <Label Text="{Binding NumberOfLikes}"
-                                TextColor="#A5B4FC"
-                                FontSize="13"
-                                FontAttributes="Bold"
-                                FontFamily="Jersey15"
-                                VerticalOptions="Center"/>
+                                                           TextColor="#A5B4FC"
+                                                           FontSize="13"
+                                                           FontAttributes="Bold"
+                                                           FontFamily="Jersey15"
+                                                           VerticalOptions="Center"/>
                                                 </StackLayout>
                                             </Frame>
                                         </FlexLayout>

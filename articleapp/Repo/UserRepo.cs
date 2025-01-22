@@ -10,13 +10,8 @@ namespace articleapp.Repo
 {
     public class UserRepo : IUser
     {
-        private readonly IConfiguration _configuration;
-
-        public UserRepo(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
- 
+     
+    
            string temptoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1c2VycyIsImlzcyI6InNlcnZlciIsImV4cCI6MTc0MDE2MDc0NCwiaWF0IjoxNzM3MTYwNzQ0LCJuYmYiOjE3MzcxNjA3NDQsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJzdHJpbmciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZEBnLmMifQ.9jZ7TDu7fqariOxHDSJ0bP8HiENNucR34fEc_nTj0LQ";
         public async Task<TokenModel> PerformLogin(LoginModel loginModel)
         {
@@ -24,19 +19,19 @@ namespace articleapp.Repo
             return await HttpRequestHelper.PostRequest<TokenModel>(url, loginModel);
         }
 
-        public async Task<UserModel> GetUserData(string? token = null, int? userId = 14)
+        public async Task<UserModel> GetUserData( int userId = 14,string? token = null)
         {
             string url = $"https://articlesapp.onrender.com/api/User/GetAccountById?userId={userId}";
             return await HttpRequestHelper.GetRequest<UserModel>(url, temptoken);
         }
 
-        public async Task<List<FollowerModel>> GetUserFollowing(string? token = null, int? userId = 14)
+        public async Task<List<FollowerModel>> GetUserFollowing(int userId = 14, string? token = null)
         {
             string url = $"https://articlesapp.onrender.com/api/User/GetUserFollowing?userId={userId}";
             return await HttpRequestHelper.GetRequest<List<FollowerModel>>(url, temptoken);
         }
 
-        public async Task<List<HobbyModel>> GetUserHobby(int? userId = 14)
+        public async Task<List<HobbyModel>> GetUserHobby(int userId = 14)
         {
             string url = $"https://articlesapp.onrender.com/api/User/GetUserHobbies?userId={userId}";
             return await HttpRequestHelper.GetRequest<List<HobbyModel>>(url, temptoken);

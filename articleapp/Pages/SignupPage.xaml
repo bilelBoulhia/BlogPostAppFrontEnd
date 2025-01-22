@@ -5,6 +5,7 @@
              x:Class="articleapp.SignupPage"
              xmlns:viewmodel="clr-namespace:articleapp.ViewModels"
              x:DataType="viewmodel:SignupViewModel"
+             Shell.TabBarIsVisible="False"
              >
 
 	

@@ -27,7 +27,7 @@
                             
                             <Frame BackgroundColor="#4F46E5"
                                    Padding="16,8"
-                                   CornerRadius="20"
+                                   CornerRadius="10"
                                    HasShadow="False"
                                    HorizontalOptions="Start"
                                    Opacity="0.9">
@@ -54,47 +54,40 @@
                            BorderColor="Transparent">
                         <VerticalStackLayout Spacing="24" Padding="16,24">
                             <!-- Author Info -->
-                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
-                                <Frame Grid.Column="0"
-                                       BackgroundColor="#1E293B"
-                                       CornerRadius="30"
-                                       HeightRequest="60"
-                                       WidthRequest="60"
-                                       Padding="0"
-                                       IsClippedToBounds="True">
-                                    <Image Source="default_avatar.png"
-                                            Aspect="AspectFill"/>
-                                </Frame>
+                            <!-- Author Info -->
+                            <Frame BackgroundColor="Transparent" Padding="0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AuthorTappedCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+                                    <Frame Grid.Column="0"
+               BackgroundColor="#1E293B"
+               CornerRadius="30"
+               HeightRequest="60"
+               WidthRequest="60"
+               Padding="0"
+               IsClippedToBounds="True">
+                                        <Image Source="default_avatar.png"
+                   Aspect="AspectFill"/>
+                                    </Frame>
 
-                                <VerticalStackLayout Grid.Column="1" 
-                                                   Spacing="4"
-                                                   VerticalOptions="Center">
-                                    <Label Text="{Binding ArticleDetails.UserName}"
-                                           TextColor="White"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           FontFamily="Jersey15"/>
-                                    <Label Text="{Binding ArticleDetails.ArticleCreatedAt, StringFormat='{0:MMMM dd, yyyy}'}"
-                                           TextColor="#6B7280"
-                                           FontSize="14"
-                                           FontFamily="Jersey15"/>
-                                </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" 
+                             Spacing="4"
+                             VerticalOptions="Center">
+                                        <Label Text="{Binding ArticleDetails.UserName}"
+                   TextColor="White"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   FontFamily="Jersey15"/>
+                                        <Label Text="{Binding ArticleDetails.ArticleCreatedAt, StringFormat='{0:MMMM dd, yyyy}'}"
+                   TextColor="#6B7280"
+                   FontSize="14"
+                   FontFamily="Jersey15"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
 
-                                <HorizontalStackLayout Grid.Column="2" 
-                                                     Spacing="20"
-                                                     VerticalOptions="Center">
 
-                                    <ImageButton
-                                         HeightRequest="10" 
-                                        WidthRequest="15"
-                                        CornerRadius="15"
-                                        Padding="5"
-                                        BackgroundColor="White"
-                                        Source="bookmark.png"
-                                        />
-                                  
-                                </HorizontalStackLayout>
-                            </Grid>
 
                             <!-- Article Content -->
                             <Label Text="{Binding ArticleDetails.ArticleContent}"

@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
+using System.Threading.Tasks;
 using articleapp.Models;
+using articleapp.Pages;
 using articleapp.Repo;
+using CommunityToolkit.Mvvm.Input;
 
 namespace articleapp.ViewModels
 {
@@ -23,18 +25,20 @@ namespace articleapp.ViewModels
             }
         }
 
+        public IRelayCommand AuthorTappedCommand { get; }
+
         public DetailedArticeleViewModel(object articleId, ArticleRepo articleRepo)
         {
             _articleId = articleId;
             _articleRepo = articleRepo;
 
-   
+            AuthorTappedCommand = new RelayCommand(OnAuthorTapped);
+
             LoadArticleDetailsAsync();
         }
 
         private async Task LoadArticleDetailsAsync()
         {
-
             try
             {
                 ArticleDetails = await _articleRepo.GetDetailedArticle(Convert.ToInt32(_articleId));
@@ -43,7 +47,14 @@ namespace articleapp.ViewModels
             {
                 Debug.WriteLine($"Error loading article details: {ex.Message}");
             }
+        }
 
+        private async void OnAuthorTapped()
+        {
+            if (ArticleDetails?.UserId != null)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new OtherPoeplePage(ArticleDetails.UserId));
+            }
         }
 
         #region INotifyPropertyChanged Implementation

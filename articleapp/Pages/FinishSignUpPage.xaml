@@ -4,7 +4,7 @@
              x:Class="articleapp.FinishSignUpPage"
              xmlns:viewmodels="clr-namespace:articleapp.ViewModels"
              xmlns:models="clr-namespace:articleapp.Models"
-             
+             Shell.TabBarIsVisible="False"
              >
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
