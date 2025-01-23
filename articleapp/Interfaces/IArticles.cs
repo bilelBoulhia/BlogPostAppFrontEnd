@@ -9,16 +9,16 @@ namespace articleapp.Interfaces
 {
     interface IArticles
     {
-        Task<string> PostArticle(ArticleModel articleModel, string? token = null);
-        Task<LikeArticleModel> PostArticleLike(LikeArticleModel likearticleModel, string? token = null);
-        Task<string> DeleteArticle(int articleId, string? token = null);
-        Task<string> DeleteLikeArticle(LikeArticleModel likeArticle, string? token = null);
-        Task<List<BasicArticleWithDetails>> GetAllArticles(string? token = null);
-        Task<List<BasicArticleWithDetails>> GetAllArticlesByUser(int userId,string? token = null );
+        Task<string> PostArticle(ArticleModel articleModel);
+        Task<LikeArticleModel> PostArticleLike(LikeArticleModel likearticleModel);
+        Task<string> DeleteArticle(int articleId);
+        Task<string> DeleteLikeArticle(LikeArticleModel likeArticle);
+        Task<List<BasicArticleWithDetails>> GetAllArticles();
+        Task<List<BasicArticleWithDetails>> GetAllArticlesByUser(int userId );
 
 
         // Saved articles
-        Task<List<BasicArticleWithDetails>> GetSavedArticlesByUser(int userId,string? token = null);
+        Task<List<BasicArticleWithDetails>> GetSavedArticlesByUser(int userId);
        
     }
 }

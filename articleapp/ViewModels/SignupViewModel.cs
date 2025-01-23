@@ -16,7 +16,7 @@ namespace articleapp.ViewModels
     public partial class SignupViewModel : INotifyPropertyChanged
     {
 
-        private readonly AuthContext _authContext;
+        private readonly AuthContext _authContext = AuthContext.Instance;
         private readonly UserRepo _userRepo;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -38,9 +38,9 @@ namespace articleapp.ViewModels
         public ICommand SignUpCommand { get; }
         public ICommand NavigateToSignInCommand { get; }
 
-        public SignupViewModel(AuthContext authContext, UserRepo userRepo)
+        public SignupViewModel( UserRepo userRepo)
         {
-            _authContext = authContext;
+            
             _userRepo = userRepo;
             SignUpCommand = new AsyncRelayCommand(CreateAccountAsync);
             NavigateToSignInCommand = new AsyncRelayCommand(NavigateToSignInAsync);
@@ -238,6 +238,7 @@ namespace articleapp.ViewModels
                     {
 
                         await _authContext.SetAsync("access_token", Loginresult.token);
+                        await _authContext.SetAsync("userId", Loginresult.userId.ToString());
                         await _authContext.SetAsync("refresh_token", Loginresult.refreshToken);
 
 

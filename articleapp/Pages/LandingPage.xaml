@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="articleapp.LandingPage"
             
+             Background="black"
              Shell.TabBarIsVisible="False"
              >
 
@@ -53,12 +54,7 @@
        BackgroundColor="Transparent"
        Opacity="0.95"
        BorderColor="Transparent">
-                        <!--<Frame.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#070F2B" Offset="0.0" />
-                                <GradientStop Color="#1A508B" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </Frame.Background>-->
+             
                         <VerticalStackLayout Spacing="20">
                             <Label Text="Features"
                TextColor="AliceBlue"
@@ -118,11 +114,12 @@
               
                 <VerticalStackLayout Grid.Row="2" Spacing="15" Margin="0,40,0,60">
                     <Button Text="Create Account"
-                            TextColor="White"
-                            FontFamily="Jersey15"
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            HeightRequest="56">
+        TextColor="White"
+        FontFamily="Jersey15"
+        FontAttributes="Bold"
+        FontSize="18"
+        HeightRequest="56"
+        Command="{Binding CreateAccountCommand}">
                         <Button.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                 <GradientStop Color="#4F46E5" Offset="0.0" />
@@ -133,14 +130,15 @@
                     </Button>
 
                     <Button Text="Sign In"
-                            TextColor="#E2E8F0"
-                            FontFamily="Jersey15"
-                            FontAttributes="Bold"
-                            FontSize="18"
-                            HeightRequest="56"
-                            BackgroundColor="#1E293B"
-                            BorderColor="#334155"
-                            BorderWidth="1">
+        TextColor="#E2E8F0"
+        FontFamily="Jersey15"
+        FontAttributes="Bold"
+        FontSize="18"
+        HeightRequest="56"
+        BackgroundColor="#1E293B"
+        BorderColor="#334155"
+        BorderWidth="1"
+        Command="{Binding SignInCommand}">
                         <Button.CornerRadius>28</Button.CornerRadius>
                     </Button>
 

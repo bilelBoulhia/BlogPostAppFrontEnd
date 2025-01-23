@@ -4,15 +4,30 @@
              x:Class="articleapp.Pages.DetailedArticleP"
              Title="Article Details">
 
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0a0426" Offset="0.5" />
             <GradientStop Color="#000000" Offset="0.0" />
             <GradientStop Color="#1a0b2e" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+    
+
 
     <Grid RowSpacing="0">
-     
+        <Button Text="Delete"
+         Command="{Binding DeleteArticleCommand}"
+         BackgroundColor="Transparent"
+         TextColor="Red"
+         FontSize="12"
+         ZIndex="500"
+         CornerRadius="20"
+         Padding="10"
+         FontAttributes="Bold"
+         Margin="10"
+         HorizontalOptions="End"
+         VerticalOptions="Start"/>
 
         <ScrollView>
             <Grid RowSpacing="0">
@@ -37,7 +52,7 @@
                                        FontSize="14"/>
                             </Frame>
 
-                            <!-- Title -->
+                          
                             <Label Text="{Binding ArticleDetails.ArticleTitle}"
                                    TextColor="White"
                                    FontSize="40"
@@ -46,15 +61,14 @@
                         </VerticalStackLayout>
                     </Grid>
 
-                    <!-- Content Section -->
+                  
                     <Frame BackgroundColor="#0D1117"
                            CornerRadius="32"
                            Margin="0,-32,0,0"
                            HasShadow="True"
                            BorderColor="Transparent">
                         <VerticalStackLayout Spacing="24" Padding="16,24">
-                            <!-- Author Info -->
-                            <!-- Author Info -->
+                      
                             <Frame BackgroundColor="Transparent" Padding="0">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding AuthorTappedCommand}" />
@@ -89,14 +103,14 @@
 
 
 
-                            <!-- Article Content -->
+                         
                             <Label Text="{Binding ArticleDetails.ArticleContent}"
                                    TextColor="#E5E7EB"
                                    FontSize="18"
                                    FontFamily="Jersey15"
                                    LineHeight="1.8"/>
 
-                            <!-- Engagement Section -->
+                          
                             <Frame BackgroundColor="#1E293B"
                                    CornerRadius="16"
                                    Padding="20"
@@ -191,7 +205,6 @@
 
                                                     </Grid>
 
-                                                    <!-- Comment Content -->
                                                     <Label Grid.Row="1"
                                                            Text="{Binding CommentContent}"
                                                            TextColor="#E5E7EB"
@@ -199,7 +212,7 @@
                                                            FontFamily="Jersey15"
                                                            LineHeight="1.6"/>
 
-                                                    <!-- Comment Actions -->
+                                                
                                                     <HorizontalStackLayout Grid.Row="2" 
                                                                          Spacing="20">
 

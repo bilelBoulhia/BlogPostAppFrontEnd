@@ -45,6 +45,8 @@ namespace articleapp
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<AddArticleModelView>();
             builder.Services.AddTransient<FinsishSignUpViewModel>();
+            builder.Services.AddTransient<LandingPageViewModel>();
+
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<SearchViewModel>();
@@ -61,10 +63,12 @@ namespace articleapp
             builder.Services.AddTransient<UserRepo>();
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<SignupPage>();
+       
             builder.Services.AddTransient<SearchModal>();
             builder.Services.AddTransient<DetailedArticleP>();
             builder.Services.AddTransient<AddPageArticel>();
- 
+            builder.Services.AddTransient<LandingPage>();
+
             builder.Services.AddTransient<OtherPoeplePage>();
             builder.Services.AddTransient<FinishSignUpPage>();
             builder.Services.AddTransient<MainArticlePage>();

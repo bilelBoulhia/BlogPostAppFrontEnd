@@ -1,27 +1,38 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Maui.Storage;
 
 namespace articleapp.auth
 {
-    public class AuthContext  : ISecureStorage
+    public class AuthContext : ISecureStorage
     {
+     
+        private static AuthContext? _instance;
 
-        public AuthContext() {
-        
+        private AuthContext() { }
+
+        public static AuthContext Instance
+        {
+            get
+            {
+               
+                if (_instance == null)
+                {
+                    _instance = new AuthContext();
+                }
+
+                return _instance;
+            }
         }
 
         public Task<string?> GetAsync(string key)
         {
-           return SecureStorage.GetAsync(key);
+            return SecureStorage.GetAsync(key);
         }
 
         public bool Remove(string key)
         {
-           return SecureStorage.Default.Remove("access_token");
+            return SecureStorage.Default.Remove(key);
         }
 
         public void RemoveAll()
@@ -31,7 +42,7 @@ namespace articleapp.auth
 
         public async Task SetAsync(string key, string value)
         {
-            await SecureStorage.Default.SetAsync("access_token", "secret-oauth-token-value");
+            await SecureStorage.Default.SetAsync(key, value);
         }
     }
 }

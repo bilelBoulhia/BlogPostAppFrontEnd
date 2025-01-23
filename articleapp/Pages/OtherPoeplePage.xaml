@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="articleapp.Pages.OtherPoeplePage"
              Title="OtherPoeplePage">
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0a0426" Offset="0.5" />
             <GradientStop Color="#000000" Offset="0.0" />
             <GradientStop Color="#1a0b2e" Offset="1.0" />
         </LinearGradientBrush>
@@ -110,7 +112,6 @@
                    
                 </Grid>
 
-                <!-- Tab Content -->
                 <CollectionView Grid.Row="2" 
  ItemsSource="{Binding CurrentArticles}"
  SelectionMode="Single"
@@ -137,7 +138,7 @@ VerticalOptions="Center"/>
         BorderColor="#1E293B"
         Margin="16,0">
 
-                                    <!-- Main Content Layout -->
+                                  
                                     <Grid RowSpacing="16">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -145,9 +146,8 @@ VerticalOptions="Center"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <!-- Author Info and Category -->
                                         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,4">
-                                            <!-- Author Avatar -->
+                                          
                                             <Frame Grid.Column="0"
                     BackgroundColor="#1E293B"
                     HeightRequest="40"
@@ -160,7 +160,7 @@ VerticalOptions="Center"/>
                         Aspect="AspectFill"/>
                                             </Frame>
 
-                                            <!-- Author Details -->
+                                           
                                             <StackLayout Grid.Column="1" 
                         Spacing="2"
                         VerticalOptions="Center">

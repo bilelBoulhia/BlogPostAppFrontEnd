@@ -13,5 +13,8 @@ namespace articleapp.Models
         public  string token { get; set; }
       
         public  string refreshToken { get; set; }
+
+
+        public int userId { get; set; }
     }
 }

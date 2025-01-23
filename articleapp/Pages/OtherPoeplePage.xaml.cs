@@ -1,3 +1,4 @@
+using articleapp.auth;
 using articleapp.Models;
 using articleapp.Repo;
 using articleapp.ViewModels;
@@ -6,6 +7,7 @@ namespace articleapp.Pages;
 
 public partial class OtherPoeplePage : ContentPage
 {
+ 
 	public OtherPoeplePage(object userId)
 	{
 		InitializeComponent();

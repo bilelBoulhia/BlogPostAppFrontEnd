@@ -4,14 +4,18 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using Serilog;
+using articleapp.auth;
+using System.Windows.Input;
 
 namespace articleapp.ViewModels
 {
     public partial class ProfileViewModel : ObservableObject
     {
         private readonly UserRepo _userRepo;
+        private readonly AuthContext _authContext = AuthContext.Instance;
         private readonly ArticleRepo _articleRepo;
-        private UserModel Userdata;
+        private int UserId;
+       
         [ObservableProperty]
         private string userName;
         [ObservableProperty]
@@ -29,27 +33,80 @@ namespace articleapp.ViewModels
         [ObservableProperty]
         private bool savedArticlesSelected;
 
+
+
         public ProfileViewModel(UserRepo userRepo, ArticleRepo articleRepo)
         {
             _userRepo = userRepo;
             _articleRepo = articleRepo;
             Hobbies = new ObservableCollection<string>();
             CurrentArticles = new ObservableCollection<BasicArticleWithDetails>();
-           
+       
+       
             MyArticlesSelected = true;
             SavedArticlesSelected = false;
             InitializeAsync();
+          
+
+          
+
+     
+
+
+        }
+
+
+
+        private async Task<int?> GetUserIDAsync()
+        {
+            try
+            {
+               
+                string? userIdString = await _authContext.GetAsync("userId");
+
+                
+                if (int.TryParse(userIdString, out int userId))
+                {
+                    return userId;
+                }
+                else
+                {
+                    
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+             
+                
+                return null;
+            }
         }
 
         private async void InitializeAsync()
         {
-            await LoadUserDataAsync();
+            try
+            {
+                var userId = await GetUserIDAsync();
+                if (userId.HasValue)
+                {
+                    UserId = userId.Value;
+                    await LoadUserDataAsync();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+     
+            }
         }
+
 
         private async Task LoadUserDataAsync()
         {
             var userData = await GetUserData();
-            Userdata = userData;
+          
             var userFollower = await GetUserFollowers();
             var userHobbies = await GetUserHobbies();
 
@@ -57,7 +114,8 @@ namespace articleapp.ViewModels
             {
                 UserName = $"{userData.UserName} {userData.UserFamilyName}";
                 
-                FollowingCount = userFollower.Count;
+                if(userFollower != null ) { FollowingCount = userFollower.Count; } else { FollowingCount = 0; }
+
 
                 if (userHobbies != null)
                 {
@@ -73,17 +131,17 @@ namespace articleapp.ViewModels
 
         private async Task<UserModel> GetUserData()
         {
-            return await _userRepo.GetUserData();
+            return await _userRepo.GetUserData(UserId);
         }
 
         private async Task<List<FollowerModel>> GetUserFollowers()
         {
-            return await _userRepo.GetUserFollowing();
+            return await _userRepo.GetUserFollowing(UserId);
         }
 
         private async Task<List<HobbyModel>> GetUserHobbies()
         {
-            return await _userRepo.GetUserHobby();
+            return await _userRepo.GetUserHobby(UserId);
         }
 
         private async Task<List<BasicArticleWithDetails>> GetUserArticles(int userId)
@@ -112,11 +170,11 @@ namespace articleapp.ViewModels
                 List<BasicArticleWithDetails> articles;
                 if (myArticles)
                 {
-                    articles = await GetUserArticles(Userdata.UserId);
+                    articles = await GetUserArticles(UserId);
                 }
                 else
                 {
-                    articles = await GetUserSavedArticles(Userdata.UserId);
+                    articles = await GetUserSavedArticles(UserId);
                 }
 
                 if(articles != null)
@@ -158,6 +216,21 @@ namespace articleapp.ViewModels
             await LoadArticles(false);
         }
 
-     
-    }
+
+        [RelayCommand]
+        private async Task Logout()
+        {
+
+
+
+                await _userRepo.PerformLogout();
+                await Shell.Current.GoToAsync("LandingPage");
+            }
+
+
+        }
+
+
+
+    
 }

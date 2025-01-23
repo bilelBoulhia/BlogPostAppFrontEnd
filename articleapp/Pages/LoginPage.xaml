@@ -8,6 +8,7 @@
         Shell.TabBarIsVisible="False"
              >
 
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0a0426" Offset="0.5" />

@@ -14,7 +14,7 @@ namespace articleapp.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
-        private readonly AuthContext _authContext;
+        private readonly AuthContext _authContext = AuthContext.Instance;
         private readonly UserRepo _userRepo;
 
         [ObservableProperty]
@@ -28,9 +28,9 @@ namespace articleapp.ViewModels
         [ObservableProperty]
         private string errorMessage;
 
-        public LoginViewModel(AuthContext authContext, UserRepo userRepo)
+        public LoginViewModel(UserRepo userRepo)
         {
-            _authContext = authContext;
+        
             _userRepo = userRepo;
             LoginCommand = new AsyncRelayCommand(PerformLoginAsync);
         }
@@ -68,18 +68,28 @@ namespace articleapp.ViewModels
 
                     await _authContext.SetAsync("access_token", result.token);
                     await _authContext.SetAsync("refresh_token", result.refreshToken);
+                    await _authContext.SetAsync("userId", result.userId.ToString());
 
-               
+
                     var toast = Toast.Make("Signed in", ToastDuration.Short, 16);
                     await toast.Show();
-                    await Shell.Current.GoToAsync("Main");
+                    await Shell.Current.GoToAsync("///Main");
                 }
             }
             catch (Exception ex)
             {
-             
-                var toast = Toast.Make(ex.Message);
-                await toast.Show();
+
+                if (DeviceInfo.Platform == DevicePlatform.Android)
+                {
+                    // Show a Toast for Android
+                    var toast = Toast.Make(ex.Message);
+                    await toast.Show();
+                }
+                else if (DeviceInfo.Platform == DevicePlatform.UWP) // Windows
+                {
+                    // Show a Display Alert for Windows
+                    await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                }
             }
         }
 

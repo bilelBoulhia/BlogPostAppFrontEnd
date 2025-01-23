@@ -15,6 +15,7 @@ namespace articleapp.ViewModels
     {
   
         private readonly UserRepo _userRepo;
+        private readonly AuthContext _authContext =AuthContext.Instance;
 
         [ObservableProperty]
         private string imageurl;
@@ -78,13 +79,13 @@ namespace articleapp.ViewModels
             {
                 IsLoading = true;
 
-                var userId = 2;
-               
 
-               
+                var userID = await _authContext.GetAsync("userId");
+
+
                 var hobbiesModel = new HobbiesModel
                 {
-                    userId = userId,
+                    userId = Convert.ToInt32(userID),
                     hobbies = SelectedHobbies.Select(h => h.HobbyId).ToList()
                 };
 
@@ -92,7 +93,7 @@ namespace articleapp.ViewModels
 
                 var toast = Toast.Make("hobbies added", ToastDuration.Short, 16);
                 await toast.Show();
-                await Shell.Current.GoToAsync("Main");
+                await Shell.Current.GoToAsync("///Main");
             }
             catch (Exception ex)
             {

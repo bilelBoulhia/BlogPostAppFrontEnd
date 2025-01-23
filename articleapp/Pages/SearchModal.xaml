@@ -9,6 +9,15 @@
             BarTextColor="White"
             SelectedTabColor="#BB86FC"
             >
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Back"
+                     IconImageSource="back_icon.png"
+                     Priority="0"
+                     Order="Primary"
+                     Command="{Binding BackCommand}" />
+    </TabbedPage.ToolbarItems>
+
+
     <ContentPage Title="articles">
 
         <ContentPage.Background>

@@ -1,82 +1,107 @@
 ﻿using articleapp.Helpers;
 using articleapp.Interfaces;
 using articleapp.Models;
-
+using articleapp.auth; 
+using Microsoft.Extensions.Configuration;
 
 namespace articleapp.Repo
 {
     public class ArticleRepo : IArticles
     {
-        string temptoken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1c2VycyIsImlzcyI6InNlcnZlciIsImV4cCI6MTc0MDE2MDc0NCwiaWF0IjoxNzM3MTYwNzQ0LCJuYmYiOjE3MzcxNjA3NDQsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJzdHJpbmciLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjE0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiZEBnLmMifQ.9jZ7TDu7fqariOxHDSJ0bP8HiENNucR34fEc_nTj0LQ";
+        private readonly AuthContext _authContext = AuthContext.Instance;
 
 
-        public async Task<string> PostArticle( ArticleModel articleModel ,string? token = null)
+      
+
+
+        private async Task<string> GetTokenAsync()
         {
-            string url = $"https://articlesapp.onrender.com/api/Article/CreateArticle";
-            return await HttpRequestHelper.PostRequest<string>(url,articleModel ,temptoken);
+            var token = await _authContext.GetAsync("access_token");
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new InvalidOperationException("no token");
+            }
+            return token;
         }
 
-        public async Task<LikeArticleModel> PostArticleLike(LikeArticleModel likearticleModel, string? token = null)
+        public async Task<string> PostArticle(ArticleModel articleModel)
         {
-            string url = $"https://articlesapp.onrender.com/api/Article/addlike";
-            return await HttpRequestHelper.PostRequest<LikeArticleModel>(url, likearticleModel, temptoken);
+            var accessToken = await GetTokenAsync(); 
+            string url = "https://articlesapp.onrender.com/api/Article/CreateArticle";
+            return await HttpRequestHelper.PostRequest<string>(url, articleModel, accessToken);
         }
 
-
-        public async Task<string> DeleteArticle(int articleId, string? token = null)
+        public async Task<LikeArticleModel> PostArticleLike(LikeArticleModel likearticleModel)
         {
+            var accessToken = await GetTokenAsync(); 
+            string url = "https://articlesapp.onrender.com/api/Article/addlike";
+            return await HttpRequestHelper.PostRequest<LikeArticleModel>(url, likearticleModel, accessToken);
+        }
+
+        public async Task<string> DeleteArticle(int articleId)
+        {
+            var accessToken = await GetTokenAsync(); 
             string url = $"https://articlesapp.onrender.com/api/Article/DeleteArticle?articleId={articleId}";
-            return await HttpRequestHelper.DeleteRequest(url, temptoken);
+            return await HttpRequestHelper.DeleteRequest(url, accessToken);
         }
 
-        public async Task<string> DeleteLikeArticle(LikeArticleModel likeArticle, string? token = null)
+        public async Task<string> DeleteLikeArticle(LikeArticleModel likeArticle)
         {
-            string url = $"https://articlesapp.onrender.com/api/Article/RemoveArticleLike";
-            return await HttpRequestHelper.DeleteRequest(url, temptoken, likeArticle);
+            var accessToken = await GetTokenAsync(); 
+            string url = "https://articlesapp.onrender.com/api/Article/RemoveArticleLike";
+            return await HttpRequestHelper.DeleteRequest(url, accessToken, likeArticle);
         }
 
-        public async Task<List<BasicArticleWithDetails>> GetAllArticles(string? token = null)
+        public async Task<List<BasicArticleWithDetails>> GetAllArticles()
         {
-            string url = $"https://articlesapp.onrender.com/api/Article/GetAllArticles";
-            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, temptoken);
+            var accessToken = await GetTokenAsync(); 
+            string url = "https://articlesapp.onrender.com/api/Article/GetAllArticles";
+            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, accessToken);
         }
-        public async Task<List<BasicArticleWithDetails>> GetAllArticlesByUser(int userId,string? token = null  )
+
+        public async Task<List<BasicArticleWithDetails>> GetAllArticlesByUser(int userId)
         {
+            var accessToken = await GetTokenAsync();
             string url = $"https://articlesapp.onrender.com/api/Article/GetArticleByUser?userId={userId}";
-            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, temptoken);
+            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, accessToken);
         }
 
-
-      public async Task<FullArticleWithDetails> GetDetailedArticle(int articleId ,string? token = null )
+        public async Task<FullArticleWithDetails> GetDetailedArticle(int articleId)
         {
+            var accessToken = await GetTokenAsync(); 
             string url = $"https://articlesapp.onrender.com/api/Article/GetFullArticleDetails?articleId={articleId}";
-
-            var articles = await HttpRequestHelper.GetRequest<List<FullArticleWithDetails>>(url, temptoken);
+            var articles = await HttpRequestHelper.GetRequest<List<FullArticleWithDetails>>(url, accessToken);
             return articles?.FirstOrDefault();
         }
 
+        public async Task<List<BasicArticleWithDetails>> GetArticlesByCategory(int articleId)
+        {
+            var accessToken = await GetTokenAsync(); 
+            string url = $"https://articlesapp.onrender.com/api/Article/GetArticlesByCategory?categoryId={articleId}";
+            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, accessToken);
+        }
 
         #region saved articles
-        public async Task<List<BasicArticleWithDetails>> GetSavedArticlesByUser(int userId , string? token = null)
+        public async Task<List<BasicArticleWithDetails>> GetSavedArticlesByUser(int userId)
         {
+            var accessToken = await GetTokenAsync(); 
             string url = $"https://articlesapp.onrender.com/api/Article/GetAllArticlesSavedByUser?userId={userId}";
-            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, temptoken);
+            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, accessToken);
         }
-        public async Task<List<BasicArticleWithDetails>> SearchArticle(string? searchQuery,string? token = null )
+
+        public async Task<List<BasicArticleWithDetails>> SearchArticle(string? searchQuery)
         {
+            var accessToken = await GetTokenAsync();
             string url = $"https://articlesapp.onrender.com/api/Article/SearchArticle?searchQuery={searchQuery}";
-            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, temptoken);
+            return await HttpRequestHelper.GetRequest<List<BasicArticleWithDetails>>(url, accessToken);
         }
 
-
-        public async Task<List<CategoryModel>> GetAllCategory(string? token = null)
+        public async Task<List<CategoryModel>> GetAllCategory()
         {
-            string url = $"https://articlesapp.onrender.com/api/Article/GetAllCategory";
-            return await HttpRequestHelper.GetRequest<List<CategoryModel>>(url, temptoken);
+            var accessToken = await GetTokenAsync(); 
+            string url = "https://articlesapp.onrender.com/api/Article/GetAllCategory";
+            return await HttpRequestHelper.GetRequest<List<CategoryModel>>(url, accessToken);
         }
-
-
-
         #endregion
     }
 }

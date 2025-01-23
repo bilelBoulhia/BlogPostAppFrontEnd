@@ -1,3 +1,4 @@
+using articleapp.auth;
 using articleapp.Models;
 using articleapp.ViewModels;
 
@@ -5,7 +6,7 @@ namespace articleapp.Pages;
 
 public partial class SearchModal : TabbedPage
 {
-   
+
     public SearchModal(SearchViewModel searchViewModel)
 	{
 		InitializeComponent();

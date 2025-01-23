@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="articleapp.Pages.MainArticlePage"
-             xmlns:local="clr-namespace:articleapp.ViewModels">
+             xmlns:local="clr-namespace:articleapp.ViewModels"
+             >
+   
 
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -65,31 +67,36 @@
                 </Frame>
             </Grid>
 
-            <ScrollView Grid.Row="1"
-                        Orientation="Horizontal"
-                        HorizontalScrollBarVisibility="Never">
-                <CollectionView ItemsSource="{Binding Categories}"
-                                ItemsLayout="HorizontalList">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Grid.Column="2"
-                                   BackgroundColor="Transparent"
-                                   BorderColor="Transparent"
-                                   Padding="12,6"
-                                   CornerRadius="20"
-                                   HasShadow="False">
-                                <Label Text="{Binding CategoryName}"
-                                       TextColor="AliceBlue"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       FontFamily="Jersey15"/>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
+                <ScrollView Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalScrollBarVisibility="Never">
+                    <CollectionView ItemsSource="{Binding Categories}"
+                    ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Grid.Column="2"
+                       BackgroundColor="{Binding CategoryId}"
+                       BorderColor="Transparent"
+                       Padding="12,6"
+                       CornerRadius="20"
+                       HasShadow="False">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=SelectCategoryCommand}"
+                                              CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
 
-            <CollectionView Grid.Row="2"
+                                    <Label Text="{Binding CategoryName}"
+                           TextColor="{Binding CategoryId}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="Jersey15"/>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+
+                <CollectionView Grid.Row="2"
                             ItemsSource="{Binding Articles}"
                             SelectionMode="Single"
                             SelectionChanged="OnArticleSelected"

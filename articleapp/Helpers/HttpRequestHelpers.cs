@@ -82,7 +82,6 @@ namespace articleapp.Helpers
                     }
                     catch
                     {
-                        // Return default value for the type T
                         return default;
                     }
 

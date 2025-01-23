@@ -6,8 +6,10 @@
              xmlns:models="clr-namespace:articleapp.Models"
              Shell.TabBarIsVisible="False"
              >
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0a0426" Offset="0.5" />
             <GradientStop Color="#000000" Offset="0.0" />
             <GradientStop Color="#1a0b2e" Offset="1.0" />
         </LinearGradientBrush>

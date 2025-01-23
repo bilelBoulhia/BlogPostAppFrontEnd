@@ -27,7 +27,7 @@
                     Color="#B3FFFFFF"
                     Size="24" />
             </Tab.Icon>
-            <ShellContent ContentTemplate="{DataTemplate pages:MainArticlePage}" Route="Main" />
+            <ShellContent ContentTemplate="{DataTemplate pages:MainArticlePage}"  Route="Main" />
         </Tab>
 
         <Tab Title="Profile">
@@ -40,8 +40,8 @@
             </Tab.Icon>
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" Route="Profile" />
         </Tab>
-
         
+
     </TabBar>
 
 </Shell>

@@ -6,153 +6,170 @@
              
              >
 
+
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0a0426" Offset="0.5" />
             <GradientStop Color="#000000" Offset="0.0" />
             <GradientStop Color="#1a0b2e" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="24,40">
-            <Grid RowSpacing="15">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
-                <Frame Grid.Row="0" 
+    <Grid>
+        <Button Text="Logout"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="12"
+                ZIndex="500"
+                CornerRadius="20"
+                Padding="10"
+                FontAttributes="Bold"
+                Margin="10"
+                HorizontalOptions="End"
+                VerticalOptions="Start"/>
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="24,40">
+                <Grid RowSpacing="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Row="0" 
                        HeightRequest="120" 
                        WidthRequest="120"
                        CornerRadius="60"
                        Padding="0"
                        IsClippedToBounds="True"
                        HorizontalOptions="Center">
-                    <Grid>
-                        <Image Aspect="AspectFill"
+                        <Grid>
+                            <Image Aspect="AspectFill"
                                Source="default_avatar.png"/>
-                    </Grid>
-                </Frame>
+                        </Grid>
+                    </Frame>
 
-                <VerticalStackLayout Grid.Row="1" 
+                    <VerticalStackLayout Grid.Row="1" 
                                      Spacing="10" 
                                      HorizontalOptions="Center">
-                    <Label Text="{Binding UserName}"
+                        <Label Text="{Binding UserName}"
                            TextColor="White"
                            FontSize="24"
                            FontFamily="Jersey15"
                            HorizontalOptions="Center"/>
 
-                    <HorizontalStackLayout Spacing="20" 
+                        <HorizontalStackLayout Spacing="20" 
                                          HorizontalOptions="Center">
-                        <Button Text="{Binding FollowingCount, StringFormat='{0:N0} Following'}"
+                            <Button Text="{Binding FollowingCount, StringFormat='{0:N0} Following'}"
                                 TextColor="White"
                                 FontFamily="Jersey15"
                                 BackgroundColor="Transparent"
                                 BorderColor="#4F46E5"
                                 BorderWidth="1"
                                 CornerRadius="20"/>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
 
-                <FlexLayout Grid.Row="2"
+                    <FlexLayout Grid.Row="2"
                            Wrap="Wrap"
                            JustifyContent="Center"
                            BindableLayout.ItemsSource="{Binding Hobbies}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Padding="12,6" 
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="12,6" 
                                    CornerRadius="25" 
                                    BackgroundColor="#2D1F47" 
                                    Margin="4">
-                                <Label Text="{Binding .}" 
+                                    <Label Text="{Binding .}" 
                                        TextColor="White" 
                                        FontFamily="Jersey15"/>
-                            </Frame>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-            </Grid>
-
-            <Grid RowDefinitions="Auto,*">
-                <Grid Grid.Row="0" 
-                      ColumnDefinitions="*,*" 
-                      Margin="0,0,0,15">
-                    <Grid.Resources>
-                        <Style TargetType="Frame">
-                            <Setter Property="BackgroundColor" Value="Transparent"/>
-                            <Setter Property="Padding" Value="10"/>
-                            <Setter Property="HasShadow" Value="False"/>
-                        </Style>
-                        <Style TargetType="Label">
-                            <Setter Property="FontFamily" Value="Jersey15"/>
-                            <Setter Property="FontSize" Value="18"/>
-                            <Setter Property="HorizontalOptions" Value="Center"/>
-                        </Style>
-                    </Grid.Resources>
-
-                    <Frame Grid.Column="0">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowMyArticlesCommand}"/>
-                        </Frame.GestureRecognizers>
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="My Articles" 
-                                   TextColor="White"/>
-                            <BoxView HeightRequest="2" 
-                                     BackgroundColor="#4F46E5"
-                                     IsVisible="{Binding MyArticlesSelected}"/>
-                        </VerticalStackLayout>
-                    </Frame>
-
-                    <Frame Grid.Column="1">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowSavedArticlesCommand}"/>
-                        </Frame.GestureRecognizers>
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Saved Articles" 
-                                   TextColor="White"/>
-                            <BoxView HeightRequest="2" 
-                                     BackgroundColor="#4F46E5"
-                                     IsVisible="{Binding SavedArticlesSelected}"/>
-                        </VerticalStackLayout>
-                    </Frame>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
                 </Grid>
 
-                <CollectionView Grid.Row="2" 
+                <Grid RowDefinitions="Auto,*">
+                    <Grid Grid.Row="0" 
+                      ColumnDefinitions="*,*" 
+                      Margin="0,0,0,15">
+                        <Grid.Resources>
+                            <Style TargetType="Frame">
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                <Setter Property="Padding" Value="10"/>
+                                <Setter Property="HasShadow" Value="False"/>
+                            </Style>
+                            <Style TargetType="Label">
+                                <Setter Property="FontFamily" Value="Jersey15"/>
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="HorizontalOptions" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+
+                        <Frame Grid.Column="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowMyArticlesCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="My Articles" 
+                                   TextColor="White"/>
+                                <BoxView HeightRequest="2" 
+                                     BackgroundColor="#4F46E5"
+                                     IsVisible="{Binding MyArticlesSelected}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <Frame Grid.Column="1">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowSavedArticlesCommand}"/>
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Saved Articles" 
+                                   TextColor="White"/>
+                                <BoxView HeightRequest="2" 
+                                     BackgroundColor="#4F46E5"
+                                     IsVisible="{Binding SavedArticlesSelected}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+
+                    <CollectionView Grid.Row="2" 
                                 ItemsSource="{Binding CurrentArticles}"
                                 SelectionMode="Single"
                                 SelectionChanged="OnArticleSelected"
                                 Margin="0,20,0,0">
-                    <CollectionView.EmptyView>
-                        <Label Text="No articles found"
+                        <CollectionView.EmptyView>
+                            <Label Text="No articles found"
                                TextColor="White"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
-                    </CollectionView.EmptyView>
-                    <CollectionView.Header>
-                        <BoxView HeightRequest="1" IsVisible="false"/>
-                    </CollectionView.Header>
-                    <CollectionView.Footer>
-                        <BoxView HeightRequest="16" IsVisible="false"/>
-                    </CollectionView.Footer>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="0,0,0,16">
-                                <Frame BackgroundColor="black"
+                        </CollectionView.EmptyView>
+                        <CollectionView.Header>
+                            <BoxView HeightRequest="1" IsVisible="false"/>
+                        </CollectionView.Header>
+                        <CollectionView.Footer>
+                            <BoxView HeightRequest="16" IsVisible="false"/>
+                        </CollectionView.Footer>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="0,0,0,16">
+                                    <Frame BackgroundColor="black"
                                        Padding="20"
                                        CornerRadius="16"
                                        BorderColor="#1E293B"
                                        Margin="16,0">
-                                    <Grid RowSpacing="16">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                                        <Grid RowSpacing="16">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
 
-                                        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,4">
-                                            <Frame Grid.Column="0"
+                                            <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,4">
+                                                <Frame Grid.Column="0"
                                                    BackgroundColor="#1E293B"
                                                    HeightRequest="40"
                                                    WidthRequest="40"
@@ -160,124 +177,129 @@
                                                    Padding="0"
                                                    IsClippedToBounds="True"
                                                    Margin="0,0,12,0">
-                                                <Image Source="default_avatar.png"
+                                                    <Image Source="default_avatar.png"
                                                        Aspect="AspectFill"/>
-                                            </Frame>
+                                                </Frame>
 
-                                            <StackLayout Grid.Column="1" 
+                                                <StackLayout Grid.Column="1" 
                                                          Spacing="2"
                                                          VerticalOptions="Center">
-                                                <Label Text="{Binding UserName}"
+                                                    <Label Text="{Binding UserName}"
                                                        TextColor="White"
                                                        FontSize="14"
                                                        FontAttributes="Bold"
                                                        FontFamily="Jersey15"/>
-                                                <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
+                                                    <Label Text="{Binding ArticleCreatedAt, StringFormat='{0:MMM dd, yyyy}'}"
                                                        TextColor="#64748B"
                                                        FontSize="12"
                                                        FontFamily="Jersey15"/>
-                                            </StackLayout>
+                                                </StackLayout>
 
-                                            <Frame Grid.Column="2"
+                                                <Frame Grid.Column="2"
                                                    Padding="16,8"
                                                    CornerRadius="12"
                                                    HasShadow="False"
                                                    IsClippedToBounds="True">
-                                                <Frame.Background>
-                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                        <GradientStop Color="#1E293B" Offset="0.0" />
-                                                        <GradientStop Color="#2D3A4F" Offset="1.0" />
-                                                    </LinearGradientBrush>
-                                                </Frame.Background>
+                                                    <Frame.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#1E293B" Offset="0.0" />
+                                                            <GradientStop Color="#2D3A4F" Offset="1.0" />
+                                                        </LinearGradientBrush>
+                                                    </Frame.Background>
 
-                                                <Frame.Shadow>
-                                                    <Shadow Brush="#000000"
+                                                    <Frame.Shadow>
+                                                        <Shadow Brush="#000000"
                                                             Offset="0,2"
                                                             Opacity="0.2"
                                                             Radius="4" />
-                                                </Frame.Shadow>
-                                                <Label Text="{Binding CategoryName}"
+                                                    </Frame.Shadow>
+                                                    <Label Text="{Binding CategoryName}"
                                                        TextColor="#A5B4FC"
                                                        FontSize="14"
                                                        FontAttributes="Bold"
                                                        FontFamily="Jersey15"
                                                        HorizontalOptions="Center"
                                                        VerticalOptions="Center">
-                                                    <Label.Shadow>
-                                                        <Shadow Brush="#000000"
+                                                        <Label.Shadow>
+                                                            <Shadow Brush="#000000"
                                                                 Offset="0,1"
                                                                 Opacity="0.3"
                                                                 Radius="2" />
-                                                    </Label.Shadow>
-                                                </Label>
-                                                <Frame.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding TapCommand}"/>
-                                                </Frame.GestureRecognizers>
-                                            </Frame>
-                                        </Grid>
+                                                        </Label.Shadow>
+                                                    </Label>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding TapCommand}"/>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+                                            </Grid>
 
-                                        <StackLayout Grid.Row="1" Spacing="12">
-                                            <Label Text="{Binding ArticleTitle}"
+                                            <StackLayout Grid.Row="1" Spacing="12">
+                                                <Label Text="{Binding ArticleTitle}"
                                                    TextColor="White"
                                                    FontSize="22"
                                                    FontFamily="Jersey15"
                                                    FontAttributes="Bold"
                                                    LineHeight="1.4"/>
 
-                                            <Label Text="{Binding ArticleContent}"
+                                                <Label Text="{Binding ArticleContent}"
                                                    TextColor="#CBD5E1"
                                                    FontSize="15"
                                                    LineHeight="1.6"
                                                    MaxLines="3"
                                                    LineBreakMode="TailTruncation"/>
-                                        </StackLayout>
+                                            </StackLayout>
 
-                                        <FlexLayout Grid.Row="2" 
+                                            <FlexLayout Grid.Row="2" 
                                                     JustifyContent="Start"
                                                     AlignItems="Center" 
                                                     Wrap="NoWrap">
-                                            <Frame BackgroundColor="#1E293B"
+                                                <Frame BackgroundColor="#1E293B"
                                                    Padding="12,8"
                                                    CornerRadius="20"
                                                    HasShadow="False"
                                                    Margin="0,0,12,0">
-                                                <StackLayout Orientation="Horizontal" Spacing="8">
-                                                    <Image Source="comment.png"
+                                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                                        <Image Source="comment.png"
                                                            HeightRequest="18"
                                                            WidthRequest="18"/>
-                                                    <Label Text="{Binding NumberOfComments}"
+                                                        <Label Text="{Binding NumberOfComments}"
                                                            TextColor="#A5B4FC"
                                                            FontSize="13"
                                                            FontAttributes="Bold"
                                                            FontFamily="Jersey15"
                                                            VerticalOptions="Center"/>
-                                                </StackLayout>
-                                            </Frame>
+                                                    </StackLayout>
+                                                </Frame>
 
-                                            <Frame BackgroundColor="#1E293B"
+                                                <Frame BackgroundColor="#1E293B"
                                                    Padding="12,8"
                                                    CornerRadius="20"
                                                    HasShadow="False">
-                                                <StackLayout Orientation="Horizontal" Spacing="8">
-                                                    <Image Source="heart.png"
+                                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                                        <Image Source="heart.png"
                                                            HeightRequest="18"
                                                            WidthRequest="18"/>
-                                                    <Label Text="{Binding NumberOfLikes}"
+                                                        <Label Text="{Binding NumberOfLikes}"
                                                            TextColor="#A5B4FC"
                                                            FontSize="13"
                                                            FontAttributes="Bold"
                                                            FontFamily="Jersey15"
                                                            VerticalOptions="Center"/>
-                                                </StackLayout>
-                                            </Frame>
-                                        </FlexLayout>
-                                    </Grid>
-                                </Frame>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
-        </VerticalStackLayout>
-    </ScrollView>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </FlexLayout>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+                </Grid>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+    </Grid>
 </ContentPage>

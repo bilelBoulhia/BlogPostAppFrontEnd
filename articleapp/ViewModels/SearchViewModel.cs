@@ -14,6 +14,7 @@ namespace articleapp.ViewModels
     {
         private readonly ArticleRepo _articleRepo;
 
+
         [ObservableProperty]
         private string searchQuery = string.Empty;
 
@@ -21,12 +22,14 @@ namespace articleapp.ViewModels
         private ObservableCollection<BasicArticleWithDetails> articles;
 
         [ObservableProperty]
-        private bool isSearching;
 
+        private bool isSearching;
+        public Command BackCommand { get; }
         public SearchViewModel(ArticleRepo articleRepo)
         {
             _articleRepo = articleRepo;
             Articles = new ObservableCollection<BasicArticleWithDetails>();
+
         }
 
         partial void OnSearchQueryChanged(string value)
